@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - SMVEC Student-Faculty Management System{% endblock %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome, {{ user_data.email }}</h1>
+        <p class="user-role">{{ user_data.user_type|title }} Dashboard</p>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Today's Classes</h3>
+                <p class="stat-number">5</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Notifications</h3>
+                <p class="stat-number">3</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Active Users</h3>
+                <p class="stat-number">156</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-info">
+                <h3>System Health</h3>
+                <p class="stat-number">98%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-features">
+        <div class="features-grid">
+            {% for feature in user_data.features %}
+            <div class="feature-card">
+                <h3><i class="fas fa-{{ feature.icon }}"></i> {{ feature.name }}</h3>
+                <p>{{ feature.description or 'Access ' + feature.name.lower() + ' functionality' }}</p>
+                <div class="feature-actions">
+                    <a href="{{ feature.url }}" class="feature-btn primary">
+                        <i class="fas fa-arrow-right"></i>
+                        Access
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="recent-activity">
+        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+        <div class="activity-list">
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <div class="activity-content">
+                    <p class="activity-title">New notes uploaded for Data Structures</p>
+                    <p class="activity-time">2 hours ago</p>
+                </div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                </div>
+                <div class="activity-content">
+                    <p class="activity-title">Schedule updated for Room 101</p>
+                    <p class="activity-time">4 hours ago</p>
+                </div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="activity-content">
+                    <p class="activity-title">New message from Faculty</p>
+                    <p class="activity-time">6 hours ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <a href="{{ url_for('complaint_submission') }}" class="quick-action-btn">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Submit Complaint</span>
+        </a>
+        
+        <a href="{{ url_for('notes') }}" class="quick-action-btn">
+            <i class="fas fa-book"></i>
+            <span>Access Notes</span>
+        </a>
+        
+        <a href="{{ url_for('room_allocation') }}" class="quick-action-btn">
+            <i class="fas fa-door-open"></i>
+            <span>Room Booking</span>
+        </a>
+        
+        <a href="{{ url_for('complaint_dashboard') }}" class="quick-action-btn">
+            <i class="fas fa-tasks"></i>
+            <span>View Complaints</span>
+        </a>
+    </div>
+
+    <div class="notifications">
+        <h3><i class="fas fa-bell"></i> Recent Notifications</h3>
+        <div class="notification-item">
+            <div class="notification-icon info">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="notification-content">
+                <p class="notification-title">System Maintenance</p>
+                <p class="notification-message">Scheduled maintenance will occur tonight at 2 AM. Please save your work.</p>
+                <p class="notification-time">1 hour ago</p>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <div class="notification-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="notification-content">
+                <p class="notification-title">Complaint Resolved</p>
+                <p class="notification-message">Your complaint regarding room temperature has been resolved.</p>
+                <p class="notification-time">3 hours ago</p>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <div class="notification-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="notification-content">
+                <p class="notification-title">Password Expiry</p>
+                <p class="notification-message">Your password will expire in 7 days. Please update it.</p>
+                <p class="notification-time">1 day ago</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_js %}
+<script>
+function navigateToFeature(url) {
+    window.location.href = url;
+}
+
+// Add loading states
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click handlers for feature cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const link = this.querySelector('a');
+            if (link) {
+                link.click();
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

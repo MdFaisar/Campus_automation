@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints - Student Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .header-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-row {
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .complaints-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            font-weight: bold;
+        }
+
+        .table th {
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-submitted {
+            background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+            color: white;
+        }
+
+        .status-in-progress {
+            background: linear-gradient(135deg, #17a2b8 0%, #007bff 100%);
+            color: white;
+        }
+
+        .status-resolved {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+
+        .status-closed {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+        }
+
+        .priority-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .priority-low { background: #d4edda; color: #155724; }
+        .priority-medium { background: #fff3cd; color: #856404; }
+        .priority-high { background: #f8d7da; color: #721c24; }
+        .priority-urgent { background: #f5c6cb; color: #721c24; }
+
+        .btn-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .blockchain-icon {
+            font-size: 1.2rem;
+        }
+
+        .no-complaints {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        .no-complaints i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .complaint-details {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1 class="header-title">
+                    <i class="fas fa-clipboard-list me-3"></i>My Complaints
+                </h1>
+                <p class="text-muted">Track the status of your submitted complaints</p>
+                <button class="btn refresh-btn" onclick="loadComplaints()">
+                    <i class="fas fa-sync-alt me-2"></i>Refresh
+                </button>
+            </div>
+
+            <!-- Statistics Row -->
+            <div class="row stats-row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalComplaints">0</div>
+                        <div class="stat-label">Total Complaints</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="pendingComplaints">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="inProgressComplaints">0</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="resolvedComplaints">0</div>
+                        <div class="stat-label">Resolved</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="loading-spinner" id="loadingSpinner">
+                <i class="fas fa-spinner fa-spin fa-3x text-primary"></i>
+                <p class="mt-3">Loading your complaints...</p>
+            </div>
+
+            <!-- Complaints Table -->
+            <div class="complaints-table" id="complaintsTable" style="display: none;">
+                <div class="table-header">
+                    <i class="fas fa-list me-2"></i>Your Complaints
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Complaint ID</th>
+                                <th>Faculty</th>
+                                <th>Category</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Submitted</th>
+                                <th>Blockchain</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="complaintsTableBody">
+                            <!-- Complaints will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- No Complaints Message -->
+            <div class="no-complaints" id="noComplaints" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <h4>No Complaints Found</h4>
+                <p>You haven't submitted any complaints yet.</p>
+                <a href="/complaint_dashboard" class="btn btn-custom">
+                    <i class="fas fa-plus me-2"></i>Submit Your First Complaint
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Complaint Details Modal -->
+    <div class="modal fade" id="complaintModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-file-alt me-2"></i>Complaint Details
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="complaintModalBody">
+                    <!-- Complaint details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentComplaints = [];
+
+        // Load complaints on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComplaints();
+        });
+
+        function loadComplaints() {
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const complaintsTable = document.getElementById('complaintsTable');
+            const noComplaints = document.getElementById('noComplaints');
+
+            // Show loading
+            loadingSpinner.style.display = 'block';
+            complaintsTable.style.display = 'none';
+            noComplaints.style.display = 'none';
+
+            fetch('/api/complaints/student/my-complaints')
+                .then(response => response.json())
+                .then(data => {
+                    loadingSpinner.style.display = 'none';
+
+                    if (data.success && data.complaints && data.complaints.length > 0) {
+                        currentComplaints = data.complaints;
+                        updateStatistics();
+                        displayComplaints(currentComplaints);
+                        complaintsTable.style.display = 'block';
+                    } else {
+                        noComplaints.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading complaints:', error);
+                    loadingSpinner.style.display = 'none';
+                    noComplaints.style.display = 'block';
+                });
+        }
+
+        function updateStatistics() {
+            const total = currentComplaints.length;
+            const pending = currentComplaints.filter(c => c.status === 'submitted').length;
+            const inProgress = currentComplaints.filter(c => c.status === 'in_progress').length;
+            const resolved = currentComplaints.filter(c => c.status === 'resolved' || c.status === 'closed').length;
+
+            document.getElementById('totalComplaints').textContent = total;
+            document.getElementById('pendingComplaints').textContent = pending;
+            document.getElementById('inProgressComplaints').textContent = inProgress;
+            document.getElementById('resolvedComplaints').textContent = resolved;
+        }
+
+        function displayComplaints(complaints) {
+            const tbody = document.getElementById('complaintsTableBody');
+            
+            tbody.innerHTML = complaints.map(complaint => `
+                <tr>
+                    <td>
+                        <button class="btn btn-link p-0 fw-bold" onclick="viewComplaint('${complaint.complaint_id}')"
+                                style="color: #667eea; text-decoration: none;">
+                            ${complaint.complaint_id.substring(0, 8)}...
+                        </button>
+                    </td>
+                    <td>${complaint.faculty_name || 'Unknown Faculty'}</td>
+                    <td>
+                        <span class="badge bg-secondary">${complaint.category}</span>
+                    </td>
+                    <td>
+                        <span class="priority-badge priority-${complaint.priority}">
+                            ${getPriorityIcon(complaint.priority)} ${complaint.priority}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="status-badge status-${complaint.status.replace('_', '-')}">
+                            ${getStatusIcon(complaint.status)} ${complaint.status.replace('_', ' ')}
+                        </span>
+                    </td>
+                    <td>${formatDate(complaint.created_at)}</td>
+                    <td class="text-center">
+                        ${complaint.blockchain_tx_hash ?
+                            `<i class="fas fa-link blockchain-icon" style="color: #28a745;" title="Recorded on blockchain"></i>` :
+                            `<i class="fas fa-times blockchain-icon" style="color: #dc3545;" title="Not on blockchain"></i>`
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-custom btn-sm" onclick="viewComplaint('${complaint.complaint_id}')">
+                            <i class="fas fa-eye me-1"></i>View
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function viewComplaint(complaintId) {
+            const complaint = currentComplaints.find(c => c.complaint_id === complaintId);
+            if (!complaint) return;
+
+            const modalBody = document.getElementById('complaintModalBody');
+            modalBody.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-id-card me-2"></i>Complaint ID</h6>
+                        <p class="text-muted">${complaint.complaint_id}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-user-tie me-2"></i>Faculty</h6>
+                        <p class="text-muted">${complaint.faculty_name || 'Unknown Faculty'}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-tag me-2"></i>Category</h6>
+                        <p class="text-muted">${complaint.category}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-exclamation-triangle me-2"></i>Priority</h6>
+                        <p class="text-muted">${complaint.priority}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-info-circle me-2"></i>Status</h6>
+                        <span class="status-badge status-${complaint.status.replace('_', '-')}">
+                            ${getStatusIcon(complaint.status)} ${complaint.status.replace('_', ' ')}
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-calendar me-2"></i>Submitted</h6>
+                        <p class="text-muted">${formatDate(complaint.created_at)}</p>
+                    </div>
+                    ${complaint.blockchain_tx_hash ? `
+                    <div class="col-12">
+                        <h6><i class="fas fa-link me-2"></i>Blockchain Transaction</h6>
+                        <p class="text-muted">
+                            <a href="https://sepolia.etherscan.io/tx/${complaint.blockchain_tx_hash}" target="_blank" class="text-decoration-none">
+                                ${complaint.blockchain_tx_hash}
+                                <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                        </p>
+                    </div>
+                    ` : ''}
+                    <div class="col-12">
+                        <h6><i class="fas fa-comment me-2"></i>Complaint Details</h6>
+                        <div class="bg-light p-3 rounded">
+                            ${complaint.complaint_text || 'No details available'}
+                        </div>
+                    </div>
+                    ${complaint.faculty_response ? `
+                    <div class="col-12 mt-3">
+                        <h6><i class="fas fa-reply me-2"></i>Faculty Response</h6>
+                        <div class="bg-primary bg-opacity-10 p-3 rounded">
+                            ${complaint.faculty_response}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            new bootstrap.Modal(document.getElementById('complaintModal')).show();
+        }
+
+        function getStatusIcon(status) {
+            const icons = {
+                'submitted': '<i class="fas fa-paper-plane"></i>',
+                'in_progress': '<i class="fas fa-cog fa-spin"></i>',
+                'resolved': '<i class="fas fa-check-circle"></i>',
+                'closed': '<i class="fas fa-times-circle"></i>'
+            };
+            return icons[status] || '<i class="fas fa-question-circle"></i>';
+        }
+
+        function getPriorityIcon(priority) {
+            const icons = {
+                'low': '<i class="fas fa-arrow-down"></i>',
+                'medium': '<i class="fas fa-minus"></i>',
+                'high': '<i class="fas fa-arrow-up"></i>',
+                'urgent': '<i class="fas fa-exclamation"></i>'
+            };
+            return icons[priority] || '<i class="fas fa-minus"></i>';
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'Unknown';
+            const date = new Date(dateString);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard - SMVEC{% endblock %}
+
+{% block additional_css %}
+<style>
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .welcome-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .welcome-section h1 {
+        margin: 0 0 10px 0;
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+
+    .welcome-section p {
+        margin: 0;
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        border-color: #667eea;
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: white;
+        font-size: 24px;
+    }
+
+    .feature-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .feature-description {
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .feature-button {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s ease;
+        width: 100%;
+    }
+
+    .feature-button:hover {
+        background: #5a6fd8;
+    }
+
+    .quick-stats {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .recent-activity {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .activity-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+
+    .activity-icon {
+        width: 40px;
+        height: 40px;
+        background: #667eea;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 15px;
+    }
+
+    .activity-content {
+        flex: 1;
+    }
+
+    .activity-title {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .activity-time {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .welcome-section h1 {
+            font-size: 2rem;
+        }
+        
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <h1>Welcome, {{ user_data.full_name or user_data.email }}!</h1>
+        <p>Student Dashboard - SMVEC College Management System</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="quick-stats">
+        <h3 style="margin-bottom: 20px; color: #333;">Quick Overview</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" id="complaint-count">-</div>
+                <div class="stat-label">Active Complaints</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ user_data.user_type|title }}</div>
+                <div class="stat-label">Account Type</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ user_data.department or 'N/A' }}</div>
+                <div class="stat-label">Department</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="last-login">Today</div>
+                <div class="stat-label">Last Login</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="features-grid">
+        <!-- AI Notes Bot -->
+        <div class="feature-card" onclick="navigateToFeature('/notes')">
+            <div class="feature-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="feature-title">AI Notes Bot</div>
+            <div class="feature-description">
+                Get instant help with your studies using our AI-powered notes assistant.
+            </div>
+            <button class="feature-button">Ask AI Bot</button>
+        </div>
+
+        <!-- Submit Complaint -->
+        <div class="feature-card" onclick="navigateToFeature('/complaint-submission')">
+            <div class="feature-icon">
+                <i class="fas fa-message-circle"></i>
+            </div>
+            <div class="feature-title">Submit Complaint</div>
+            <div class="feature-description">
+                Submit anonymous complaints to faculty members through our secure system.
+            </div>
+            <button class="feature-button">Submit Complaint</button>
+        </div>
+
+        <!-- View My Complaints -->
+        <div class="feature-card" onclick="navigateToFeature('/student-complaint-dashboard')">
+            <div class="feature-icon">
+                <i class="fas fa-list-check"></i>
+            </div>
+            <div class="feature-title">My Complaints</div>
+            <div class="feature-description">
+                Track the status of your submitted complaints and view responses.
+            </div>
+            <button class="feature-button">View Complaints</button>
+        </div>
+
+        <!-- My Schedule -->
+        <div class="feature-card" onclick="navigateToFeature('/schedule')">
+            <div class="feature-icon">
+                <i class="fas fa-calendar"></i>
+            </div>
+            <div class="feature-title">My Schedule</div>
+            <div class="feature-description">
+                View your class schedule, exam dates, and important academic events.
+            </div>
+            <button class="feature-button">View Schedule</button>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="recent-activity">
+        <div class="activity-header">
+            <h3 style="margin: 0; color: #333;">Recent Activity</h3>
+            <a href="/student-complaint-dashboard" style="color: #667eea; text-decoration: none;">View All</a>
+        </div>
+        <div id="recent-activities">
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Successfully logged in</div>
+                    <div class="activity-time">Just now</div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-shield-check"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Account verified and active</div>
+                    <div class="activity-time">Today</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function navigateToFeature(url) {
+        window.location.href = url;
+    }
+
+    // Load complaint count
+    function loadComplaintCount() {
+        fetch('/api/complaints/student/my-complaints')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.complaints) {
+                    const activeComplaints = data.complaints.filter(c => 
+                        c.status !== 'resolved' && c.status !== 'closed'
+                    ).length;
+                    document.getElementById('complaint-count').textContent = activeComplaints;
+                }
+            })
+            .catch(error => {
+                console.log('Could not load complaint count:', error);
+                document.getElementById('complaint-count').textContent = '0';
+            });
+    }
+
+    // Load recent activities
+    function loadRecentActivities() {
+        fetch('/api/complaints/student/my-complaints')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.complaints && data.complaints.length > 0) {
+                    const recentComplaints = data.complaints
+                        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                        .slice(0, 3);
+                    
+                    const activitiesContainer = document.getElementById('recent-activities');
+                    const existingActivities = activitiesContainer.innerHTML;
+                    
+                    const complaintActivities = recentComplaints.map(complaint => `
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-message-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Complaint submitted to ${complaint.faculty_name || 'Faculty'}</div>
+                                <div class="activity-time">${formatDate(complaint.created_at)}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    activitiesContainer.innerHTML = existingActivities + complaintActivities;
+                }
+            })
+            .catch(error => {
+                console.log('Could not load recent activities:', error);
+            });
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 1) return 'Yesterday';
+        if (diffDays < 7) return `${diffDays} days ago`;
+        return date.toLocaleDateString();
+    }
+
+    // Load data when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadComplaintCount();
+        loadRecentActivities();
+    });
+</script>
+{% endblock %}

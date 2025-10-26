@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Register - SMVEC Student-Faculty Management System{% endblock %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card register-card">
+        <div class="login-header">
+            <h1>Join SMVEC</h1>
+            <p>Create your account in our Student-Faculty Management System</p>
+        </div>
+
+        <form id="registerForm" class="login-form">
+            <div class="form-group">
+                <label for="userType">Register As</label>
+                <div class="input-container">
+                    <i class="fas fa-user-tag"></i>
+                    <select id="userType" name="user_type" required onchange="updateFormFields()">
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="fullName" name="full_name" required placeholder="Enter your full name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+            </div>
+
+            <!-- Dynamic fields based on user type -->
+            <div id="dynamicFields">
+                <!-- Student fields (default) -->
+                <div class="form-group student-field">
+                    <label for="studentId">Student ID</label>
+                    <div class="input-container">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="studentId" name="student_id" placeholder="Enter your student ID">
+                    </div>
+                </div>
+
+                <div class="form-group student-field">
+                    <label for="section">Section</label>
+                    <div class="input-container">
+                        <i class="fas fa-users"></i>
+                        <input type="text" id="section" name="section" placeholder="Enter your section">
+                    </div>
+                </div>
+
+                <!-- Faculty fields (hidden by default) -->
+                <div class="form-group faculty-field" style="display: none;">
+                    <label for="employeeId">Employee ID</label>
+                    <div class="input-container">
+                        <i class="fas fa-id-badge"></i>
+                        <input type="text" id="employeeId" name="employee_id" placeholder="Enter your employee ID">
+                    </div>
+                </div>
+
+                <div class="form-group faculty-field" style="display: none;">
+                    <label for="department">Department</label>
+                    <div class="input-container">
+                        <i class="fas fa-building"></i>
+                        <select id="department" name="department">
+                            <option value="">Select Department</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Civil">Civil</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Admin fields (hidden by default) -->
+                <div class="form-group admin-field" style="display: none;">
+                    <label for="adminCode">Admin Code</label>
+                    <div class="input-container">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="adminCode" name="admin_code" placeholder="Enter admin code">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" required placeholder="Create a password">
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        <i class="fas fa-eye" id="passwordToggle"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirmPassword" name="confirm_password" required placeholder="Confirm your password">
+                </div>
+            </div>
+
+            <button type="submit" class="btn">
+                <i class="fas fa-user-plus"></i>
+                Create Account
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Sign in here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+<script>
+function updateFormFields() {
+    const userType = document.getElementById('userType').value;
+    const studentFields = document.querySelectorAll('.student-field');
+    const facultyFields = document.querySelectorAll('.faculty-field');
+    const adminFields = document.querySelectorAll('.admin-field');
+
+    // Hide all fields first
+    studentFields.forEach(field => field.style.display = 'none');
+    facultyFields.forEach(field => field.style.display = 'none');
+    adminFields.forEach(field => field.style.display = 'none');
+
+    // Show relevant fields based on user type
+    if (userType === 'student') {
+        studentFields.forEach(field => field.style.display = 'block');
+    } else if (userType === 'faculty') {
+        facultyFields.forEach(field => field.style.display = 'block');
+    } else if (userType === 'admin') {
+        adminFields.forEach(field => field.style.display = 'block');
+    }
+}
+
+function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const passwordToggle = document.getElementById('passwordToggle');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        passwordToggle.className = 'fas fa-eye-slash';
+    } else {
+        passwordField.type = 'password';
+        passwordToggle.className = 'fas fa-eye';
+    }
+}
+
+// Initialize registration form
+document.addEventListener('DOMContentLoaded', function() {
+    initializeRegisterForm();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMVEC Registration - College Authentication</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 500px;
+        }
+
+        .college-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .college-logo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .college-name {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .btn-register:disabled {
+            opacity: 0.7;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .user-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-type-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .user-type-option:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .user-type-option.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .user-type-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .email-info {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .email-format {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: #495057;
+        }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .loading-spinner {
+            display: none;
+        }
+
+        .form-floating label {
+            color: #6c757d;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="auth-container">
+            <!-- College Header -->
+            <div class="college-header">
+                <div class="college-logo">
+                    <i class="fas fa-graduation-cap me-2"></i>SMVEC
+                </div>
+                <div class="college-name">Sri Manakula Vinayagar Engineering college</div>
+                <div class="text-muted">College Authentication System</div>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="registrationForm">
+                <!-- User Type Selection -->
+                <div class="user-type-selector">
+                    <div class="user-type-option" data-type="student">
+                        <div class="user-type-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="fw-bold">Student</div>
+                        <div class="text-muted small">Register as Student</div>
+                    </div>
+                    <div class="user-type-option" data-type="faculty">
+                        <div class="user-type-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="fw-bold">Faculty</div>
+                        <div class="text-muted small">Register as Faculty</div>
+                    </div>
+                </div>
+
+                <!-- Email Format Information -->
+                <div class="email-info" id="emailInfo" style="display: none;">
+                    <div class="d-flex align-items-start">
+                        <i class="fas fa-info-circle me-2 mt-1" style="color: #1976d2;"></i>
+                        <div>
+                            <strong>Email Format:</strong><br>
+                            <span id="emailFormatText"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alert Messages -->
+                <div id="alertContainer"></div>
+
+                <!-- Form Fields -->
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="fullName" name="full_name" required>
+                            <label for="fullName">
+                                <i class="fas fa-user me-2"></i>Full Name
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="registerNumber" name="register_number" required>
+                            <label for="registerNumber">
+                                <i class="fas fa-id-card me-2"></i>Register Number
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="form-floating">
+                            <select class="form-select" id="department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics and Communication">Electronics and Communication</option>
+                                <option value="Electrical and Electronics">Electrical and Electronics</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="English">English</option>
+                            </select>
+                            <label for="department">
+                                <i class="fas fa-building me-2"></i>Department
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3" id="sectionField" style="display: none;">
+                        <div class="form-floating">
+                            <select class="form-select" id="section" name="section">
+                                <option value="">Select Section</option>
+                                <option value="A">Section A</option>
+                                <option value="B">Section B</option>
+                                <option value="C">Section C</option>
+                                <option value="D">Section D</option>
+                            </select>
+                            <label for="section">
+                                <i class="fas fa-users me-2"></i>Section
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <label for="email">
+                                <i class="fas fa-envelope me-2"></i>College Email ID
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-register" id="submitBtn">
+                    <span class="btn-text">
+                        <i class="fas fa-paper-plane me-2"></i>Send OTP
+                    </span>
+                    <span class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin me-2"></i>Sending OTP...
+                    </span>
+                </button>
+            </form>
+
+            <!-- Login Link -->
+            <div class="login-link">
+                Already have an account? <a href="/login">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let selectedUserType = '';
+
+        // User type selection
+        document.querySelectorAll('.user-type-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove active class from all options
+                document.querySelectorAll('.user-type-option').forEach(opt => opt.classList.remove('active'));
+                
+                // Add active class to selected option
+                this.classList.add('active');
+                
+                selectedUserType = this.dataset.type;
+                
+                // Show/hide section field based on user type
+                const sectionField = document.getElementById('sectionField');
+                const emailInfo = document.getElementById('emailInfo');
+                const emailFormatText = document.getElementById('emailFormatText');
+                
+                if (selectedUserType === 'student') {
+                    sectionField.style.display = 'block';
+                    document.getElementById('section').required = true;
+                    emailFormatText.innerHTML = 'Students: <span class="email-format">btech[your-details]@smvec.ac.in</span>';
+                } else {
+                    sectionField.style.display = 'none';
+                    document.getElementById('section').required = false;
+                    emailFormatText.innerHTML = 'Faculty: <span class="email-format">btech[your-name]@smvec.ac.in</span>';
+                }
+                
+                emailInfo.style.display = 'block';
+            });
+        });
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedUserType) {
+                showAlert('Please select whether you are a Student or Faculty', 'warning');
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const data = {
+                user_type: selectedUserType,
+                full_name: formData.get('full_name'),
+                register_number: formData.get('register_number'),
+                department: formData.get('department'),
+                email: formData.get('email').toLowerCase().trim()
+            };
+            
+            // Add section for students
+            if (selectedUserType === 'student') {
+                data.section = formData.get('section');
+            }
+            
+            // Validate email format
+            if (!validateEmailFormat(data.email, selectedUserType)) {
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const loadingSpinner = submitBtn.querySelector('.loading-spinner');
+            
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            loadingSpinner.style.display = 'inline';
+            
+            // Submit registration
+            fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    showAlert(result.message, 'success');
+                    setTimeout(() => {
+                        window.location.href = `/verify-otp?email=${encodeURIComponent(result.email)}`;
+                    }, 2000);
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            })
+            .catch(error => {
+                console.error('Registration error:', error);
+                showAlert('Registration failed. Please try again.', 'danger');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                loadingSpinner.style.display = 'none';
+            });
+        });
+
+        function validateEmailFormat(email, userType) {
+            if (!email.endsWith('@smvec.ac.in')) {
+                showAlert('Email must be from @smvec.ac.in domain', 'danger');
+                return false;
+            }
+            
+            const username = email.split('@')[0];
+            
+            if (userType === 'student') {
+                if (!username.startsWith('btech')) {
+                    showAlert('Student emails must start with "btech"', 'danger');
+                    return false;
+                }
+            } else if (userType === 'faculty') {
+                if (!username.startsWith('btech')) {
+                    showAlert('Faculty emails is not correct', 'danger');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alertDiv);
+            
+            // Auto-dismiss success alerts
+            if (type === 'success') {
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

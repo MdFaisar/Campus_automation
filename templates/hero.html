@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to SMVEC Student-Faculty Portal{% endblock %}
+
+{% block additional_css %}
+<style>
+    .hero-section {
+        min-height: calc(100vh - 180px);
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: var(--surface);
+        padding: var(--spacing-xxl) 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-xl);
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.1;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-xl);
+        max-width: 600px;
+        opacity: 0.9;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-xxl);
+    }
+
+    .hero-btn {
+        padding: var(--spacing-md) var(--spacing-xl);
+        border-radius: var(--border-radius-md);
+        font-weight: var(--font-weight-semibold);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .hero-btn-primary {
+        background: var(--accent);
+        color: var(--text-primary);
+    }
+
+    .hero-btn-primary:hover {
+        background: var(--accent-light);
+        transform: translateY(-2px);
+    }
+
+    .hero-btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--surface);
+        border: 2px solid var(--surface);
+    }
+
+    .hero-btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .features-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--surface);
+    }
+
+    .features-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-xl);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-xl);
+    }
+
+    .feature-card {
+        padding: var(--spacing-xl);
+        border-radius: var(--border-radius-lg);
+        background: var(--background);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .feature-title {
+        font-size: 1.25rem;
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+
+    .feature-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+        }
+
+        .hero-actions {
+            flex-direction: column;
+        }
+
+        .hero-btn {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">Welcome to SMVEC Student-Faculty Portal</h1>
+        <p class="hero-subtitle">
+            A comprehensive platform designed to streamline communication and collaboration between students and faculty members at Sri Manakula Vinayagar Engineering College.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('auth.login_page') }}" class="hero-btn hero-btn-primary">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a href="{{ url_for('auth.register_page') }}" class="hero-btn hero-btn-secondary">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-comments"></i>
+            </div>
+            <h3 class="feature-title">Seamless Communication</h3>
+            <p class="feature-description">
+                Direct communication channels between students and faculty members for quick queries, doubt clarification, and academic discussions.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-tasks"></i>
+            </div>
+            <h3 class="feature-title">Resource Management</h3>
+            <p class="feature-description">
+                Easy access to study materials, notes, and important documents. Efficiently manage and share academic resources.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3 class="feature-title">Room Allocation</h3>
+            <p class="feature-description">
+                Simplified room booking and management system for classes, labs, and special events with real-time availability tracking.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3 class="feature-title">Complaint Management</h3>
+            <p class="feature-description">
+                Structured system for raising and tracking complaints, ensuring timely resolution of student concerns.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="feature-title">Secure Access</h3>
+            <p class="feature-description">
+                Role-based access control ensuring data privacy and security. Each user has access to relevant features based on their role.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h3 class="feature-title">Real-time Notifications</h3>
+            <p class="feature-description">
+                Stay updated with important announcements, updates, and status changes through instant notifications.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,527 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - SMVEC{% endblock %}
+
+{% block additional_css %}
+<style>
+    .dashboard-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .admin-header {
+        background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .admin-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 200%;
+        background: rgba(255,255,255,0.1);
+        transform: rotate(45deg);
+    }
+
+    .admin-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 2.5rem;
+        font-weight: 300;
+        position: relative;
+        z-index: 1;
+    }
+
+    .admin-header p {
+        margin: 0;
+        font-size: 1.2rem;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+    }
+
+    .admin-badge {
+        background: rgba(255,255,255,0.2);
+        padding: 8px 20px;
+        border-radius: 25px;
+        display: inline-block;
+        margin-top: 15px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #dc2626;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #dc2626, #991b1b);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #dc2626;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .stat-change {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-weight: 500;
+    }
+
+    .stat-change.positive {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+
+    .stat-change.negative {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .admin-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        border-color: #dc2626;
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #dc2626, #991b1b);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: white;
+        font-size: 24px;
+    }
+
+    .feature-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .feature-description {
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .feature-button {
+        background: #dc2626;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s ease;
+        width: 100%;
+    }
+
+    .feature-button:hover {
+        background: #991b1b;
+    }
+
+    .recent-activity {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+    }
+
+    .activity-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        transition: background 0.3s ease;
+    }
+
+    .activity-item:hover {
+        background: #f8f9fa;
+    }
+
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+
+    .activity-icon {
+        width: 40px;
+        height: 40px;
+        background: #dc2626;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 15px;
+    }
+
+    .activity-content {
+        flex: 1;
+    }
+
+    .activity-title {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .activity-time {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .quick-actions {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .action-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .action-btn {
+        background: linear-gradient(135deg, #dc2626, #991b1b);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .admin-features {
+            grid-template-columns: 1fr;
+        }
+        
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .admin-header h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <i class="fas fa-shield-alt" style="font-size: 3rem; margin-bottom: 15px; position: relative; z-index: 1;"></i>
+        <h1>Welcome, {{ user_data.full_name or user_data.email }}!</h1>
+        <p>Administrator Dashboard - SMVEC College Management System</p>
+        <div class="admin-badge">
+            <i class="fas fa-crown"></i> System Administrator
+        </div>
+    </div>
+
+    <!-- Statistics Grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-change positive">+12%</div>
+            </div>
+            <div class="stat-number" id="total-users">-</div>
+            <div class="stat-label">Total Users</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="stat-change positive">+5%</div>
+            </div>
+            <div class="stat-number" id="total-rooms">-</div>
+            <div class="stat-label">Total Rooms</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-change negative">-8%</div>
+            </div>
+            <div class="stat-number" id="pending-complaints">-</div>
+            <div class="stat-label">Pending Complaints</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-change positive">+3%</div>
+            </div>
+            <div class="stat-number">98%</div>
+            <div class="stat-label">System Health</div>
+        </div>
+    </div>
+
+    <!-- Admin Features -->
+    <div class="admin-features">
+        <!-- User Management -->
+        <div class="feature-card" onclick="navigateToFeature('/user-management')">
+            <div class="feature-icon">
+                <i class="fas fa-users-cog"></i>
+            </div>
+            <div class="feature-title">User Management</div>
+            <div class="feature-description">
+                Manage student and faculty accounts, permissions, and access controls.
+            </div>
+            <button class="feature-button">Manage Users</button>
+        </div>
+
+        <!-- Room Management -->
+        <div class="feature-card" onclick="navigateToFeature('/room-management')">
+            <div class="feature-icon">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="feature-title">Room Management</div>
+            <div class="feature-description">
+                Add, edit, and manage college rooms, facilities, and booking systems.
+            </div>
+            <button class="feature-button">Manage Rooms</button>
+        </div>
+
+        <!-- Complaint Management -->
+        <div class="feature-card" onclick="navigateToFeature('/complaint-management')">
+            <div class="feature-icon">
+                <i class="fas fa-shield-check"></i>
+            </div>
+            <div class="feature-title">Complaint Management</div>
+            <div class="feature-description">
+                Monitor and manage the complaint system, view analytics and reports.
+            </div>
+            <button class="feature-button">Manage Complaints</button>
+        </div>
+
+        <!-- System Reports -->
+        <div class="feature-card" onclick="navigateToFeature('/reports')">
+            <div class="feature-icon">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <div class="feature-title">System Reports</div>
+            <div class="feature-description">
+                Generate comprehensive reports on system usage, performance, and analytics.
+            </div>
+            <button class="feature-button">View Reports</button>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="recent-activity">
+        <div class="activity-header">
+            <h3 style="margin: 0; color: #333;">Recent System Activity</h3>
+            <a href="/system-logs" style="color: #dc2626; text-decoration: none;">View All Logs</a>
+        </div>
+        <div id="recent-activities">
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Admin login successful</div>
+                    <div class="activity-time">Just now</div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-shield-check"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">System security check completed</div>
+                    <div class="activity-time">5 minutes ago</div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Database backup completed</div>
+                    <div class="activity-time">1 hour ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h3 style="margin-bottom: 20px; color: #333;">Quick Actions</h3>
+        <div class="action-buttons">
+            <button class="action-btn" onclick="navigateToFeature('/user-management')">
+                <i class="fas fa-user-plus"></i>
+                Add New User
+            </button>
+            <button class="action-btn" onclick="navigateToFeature('/room-management')">
+                <i class="fas fa-plus-circle"></i>
+                Add New Room
+            </button>
+            <button class="action-btn" onclick="navigateToFeature('/reports')">
+                <i class="fas fa-download"></i>
+                Generate Report
+            </button>
+            <button class="action-btn" onclick="navigateToFeature('/system-settings')">
+                <i class="fas fa-cog"></i>
+                System Settings
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function navigateToFeature(url) {
+        window.location.href = url;
+    }
+
+    // Load admin statistics
+    function loadAdminStats() {
+        // Load total users
+        fetch('/api/admin/stats/users')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('total-users').textContent = data.count || '0';
+                }
+            })
+            .catch(error => {
+                console.log('Could not load user stats:', error);
+                document.getElementById('total-users').textContent = '0';
+            });
+
+        // Load total rooms
+        fetch('/api/admin/rooms')
+            .then(response => response.json())
+            .then(data => {
+                if (data.rooms) {
+                    document.getElementById('total-rooms').textContent = data.rooms.length;
+                }
+            })
+            .catch(error => {
+                console.log('Could not load room stats:', error);
+                document.getElementById('total-rooms').textContent = '0';
+            });
+
+        // Load pending complaints
+        fetch('/api/admin/stats/complaints')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('pending-complaints').textContent = data.pending || '0';
+                }
+            })
+            .catch(error => {
+                console.log('Could not load complaint stats:', error);
+                document.getElementById('pending-complaints').textContent = '0';
+            });
+    }
+
+    // Load data when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadAdminStats();
+    });
+</script>
+{% endblock %}

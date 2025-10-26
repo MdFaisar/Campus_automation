@@ -1,0 +1,936 @@
+{% extends "base.html" %}
+
+{% block title %}Complaint Dashboard{% endblock %}
+
+{% block additional_css %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .dashboard-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .dashboard-header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .dashboard-header h1 {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .stats-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .stats-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, var(--card-color) 0%, var(--card-color-light) 100%);
+    }
+
+    .stats-card.total {
+        --card-color: #3498db;
+        --card-color-light: #5dade2;
+    }
+
+    .stats-card.pending {
+        --card-color: #f39c12;
+        --card-color-light: #f7dc6f;
+    }
+
+    .stats-card.resolved {
+        --card-color: #27ae60;
+        --card-color-light: #58d68d;
+    }
+
+    .stats-card.high-priority {
+        --card-color: #e74c3c;
+        --card-color-light: #ec7063;
+    }
+
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--card-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .stats-label {
+        color: #5a6c7d;
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    .stats-icon {
+        font-size: 2.5rem;
+        color: var(--card-color);
+        opacity: 0.7;
+    }
+
+    .main-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+    }
+
+    .card-header-custom {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem 2rem;
+        border: none;
+    }
+
+    .card-body-custom {
+        padding: 2rem;
+    }
+
+    .filter-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+
+    .btn-custom {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        color: white;
+    }
+
+    .table-custom {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .table-custom thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .table-custom th {
+        border: none;
+        padding: 1rem;
+        font-weight: 600;
+    }
+
+    .table-custom td {
+        border: none;
+        padding: 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+    .table-custom tbody tr:hover {
+        background: #f8f9fa;
+    }
+
+    .badge-custom {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .modal-custom .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-custom .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px 20px 0 0;
+        border: none;
+    }
+
+    .no-complaints {
+        text-align: center;
+        padding: 3rem;
+        color: #6c757d;
+    }
+
+    .no-complaints i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>
+                <i class="fas fa-clipboard-list"></i>
+                Complaint Management Dashboard
+            </h1>
+            <p style="color: #5a6c7d; font-size: 1.1rem; margin: 0;">Monitor and manage anonymous complaints efficiently</p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card total">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stats-number" id="totalComplaints">0</div>
+                            <div class="stats-label">Total Complaints</div>
+                        </div>
+                        <div class="stats-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card pending">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stats-number" id="pendingComplaints">0</div>
+                            <div class="stats-label">Pending</div>
+                        </div>
+                        <div class="stats-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card resolved">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stats-number" id="resolvedComplaints">0</div>
+                            <div class="stats-label">Resolved</div>
+                        </div>
+                        <div class="stats-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stats-card high-priority">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stats-number" id="highPriorityComplaints">0</div>
+                            <div class="stats-label">High Priority</div>
+                        </div>
+                        <div class="stats-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Card -->
+        <div class="main-card">
+            <div class="card-header-custom">
+                <h4 class="mb-0">
+                    <i class="fas fa-table me-2"></i>
+                    Complaints Overview
+                </h4>
+            </div>
+            <div class="card-body-custom">
+                <!-- Filters -->
+                <div class="filter-section">
+                    <h5 class="mb-3" style="color: #2c3e50; font-weight: 600;">
+                        <i class="fas fa-filter me-2" style="color: #667eea;"></i>
+                        Filter Complaints
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="statusFilter" class="form-label" style="font-weight: 600; color: #2c3e50;">Status</label>
+                            <select class="form-select" id="statusFilter">
+                                <option value="">All Statuses</option>
+                                <option value="submitted">📝 Submitted</option>
+                                <option value="in_progress">⏳ In Progress</option>
+                                <option value="resolved">✅ Resolved</option>
+                                <option value="closed">🔒 Closed</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="categoryFilter" class="form-label" style="font-weight: 600; color: #2c3e50;">Category</label>
+                            <select class="form-select" id="categoryFilter">
+                                <option value="">All Categories</option>
+                                <option value="academic">📚 Academic Issues</option>
+                                <option value="infrastructure">🏢 Infrastructure</option>
+                                <option value="harassment">⚠️ Harassment</option>
+                                <option value="discrimination">🚫 Discrimination</option>
+                                <option value="administrative">📋 Administrative</option>
+                                <option value="general">💬 General</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="priorityFilter" class="form-label" style="font-weight: 600; color: #2c3e50;">Priority</label>
+                            <select class="form-select" id="priorityFilter">
+                                <option value="">All Priorities</option>
+                                <option value="urgent">🔴 Urgent</option>
+                                <option value="high">🟠 High</option>
+                                <option value="medium">🟡 Medium</option>
+                                <option value="low">🟢 Low</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button class="btn btn-custom w-100" id="refreshBtn">
+                                <i class="fas fa-sync-alt me-2"></i>Refresh Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complaints Table -->
+                <div class="table-responsive">
+                    <table class="table table-custom">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                <th><i class="fas fa-tags me-2"></i>Category</th>
+                                <th><i class="fas fa-exclamation-triangle me-2"></i>Priority</th>
+                                <th><i class="fas fa-info-circle me-2"></i>Status</th>
+                                <th><i class="fas fa-calendar me-2"></i>Submitted</th>
+                                <th><i class="fas fa-link me-2"></i>Blockchain</th>
+                                <th><i class="fas fa-cogs me-2"></i>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="complaintsTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center" style="padding: 3rem;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <div class="spinner-border text-primary mb-3" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <h6 style="color: #6c757d;">Loading complaints...</h6>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- No complaints message -->
+                <div id="noComplaints" class="no-complaints" style="display: none;">
+                    <i class="fas fa-inbox"></i>
+                    <h5>No complaints found</h5>
+                    <p>There are no complaints matching your current filters.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Complaint Detail Modal -->
+<div class="modal fade modal-custom" id="complaintModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-file-alt me-2"></i>
+                    Complaint Details
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="padding: 2rem;">
+                <div id="complaintDetails">
+                    <!-- Complaint details will be loaded here -->
+                </div>
+
+                <!-- Response Form -->
+                <div class="mt-4" style="background: #f8f9fa; padding: 1.5rem; border-radius: 15px;">
+                    <h6 style="color: #2c3e50; font-weight: 600; margin-bottom: 1.5rem;">
+                        <i class="fas fa-reply me-2" style="color: #667eea;"></i>
+                        Faculty Response
+                    </h6>
+                    <div class="mb-3">
+                        <label for="statusSelect" class="form-label" style="font-weight: 600; color: #2c3e50;">Update Status</label>
+                        <select class="form-select" id="statusSelect">
+                            <option value="submitted">📝 Submitted</option>
+                            <option value="in_progress">⏳ In Progress</option>
+                            <option value="resolved">✅ Resolved</option>
+                            <option value="closed">🔒 Closed</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="responseText" class="form-label" style="font-weight: 600; color: #2c3e50;">Response (Optional)</label>
+                        <textarea class="form-control" id="responseText" rows="4"
+                                  placeholder="Enter your response to this complaint..." style="border-radius: 10px;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 1.5rem 2rem;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 10px;">
+                    <i class="fas fa-times me-2"></i>Close
+                </button>
+                <button type="button" class="btn btn-custom" id="updateComplaintBtn">
+                    <i class="fas fa-save me-2"></i>Update Complaint
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const statusFilter = document.getElementById('statusFilter');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const priorityFilter = document.getElementById('priorityFilter');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const complaintsTableBody = document.getElementById('complaintsTableBody');
+    const noComplaints = document.getElementById('noComplaints');
+    const complaintModal = new bootstrap.Modal(document.getElementById('complaintModal'));
+    const updateComplaintBtn = document.getElementById('updateComplaintBtn');
+
+    let currentComplaints = [];
+    let selectedComplaintId = null;
+
+    // Load complaints on page load
+    loadComplaints();
+
+    // Event listeners
+    refreshBtn.addEventListener('click', loadComplaints);
+    statusFilter.addEventListener('change', filterComplaints);
+    categoryFilter.addEventListener('change', filterComplaints);
+    priorityFilter.addEventListener('change', filterComplaints);
+    updateComplaintBtn.addEventListener('click', updateComplaint);
+
+    function loadComplaints() {
+        refreshBtn.disabled = true;
+        refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+
+        // Get faculty ID from session (you might need to pass this from the backend)
+        const facultyId = '{{ user_data.user_id }}';
+
+        fetch(`/api/complaints/faculty/${facultyId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.complaints) {
+                    currentComplaints = data.complaints;
+                    updateStatistics();
+                    displayComplaints(currentComplaints);
+                } else {
+                    showError('Failed to load complaints');
+                }
+            })
+            .catch(error => {
+                console.error('Error loading complaints:', error);
+                showError('Failed to load complaints');
+            })
+            .finally(() => {
+                refreshBtn.disabled = false;
+                refreshBtn.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Refresh';
+            });
+    }
+
+    function updateStatistics() {
+        const total = currentComplaints.length;
+        const pending = currentComplaints.filter(c => c.status === 'submitted' || c.status === 'in_progress').length;
+        const resolved = currentComplaints.filter(c => c.status === 'resolved').length;
+        const highPriority = currentComplaints.filter(c => c.priority === 'high' || c.priority === 'urgent').length;
+
+        document.getElementById('totalComplaints').textContent = total;
+        document.getElementById('pendingComplaints').textContent = pending;
+        document.getElementById('resolvedComplaints').textContent = resolved;
+        document.getElementById('highPriorityComplaints').textContent = highPriority;
+    }
+
+    function displayComplaints(complaints) {
+        if (complaints.length === 0) {
+            complaintsTableBody.innerHTML = '';
+            noComplaints.style.display = 'block';
+            return;
+        }
+
+        noComplaints.style.display = 'none';
+
+        complaintsTableBody.innerHTML = complaints.map(complaint => `
+            <tr style="transition: all 0.3s ease;">
+                <td>
+                    <button class="btn btn-link p-0 fw-bold" onclick="viewComplaint('${complaint.complaint_id}')"
+                            style="color: #667eea; text-decoration: none;">
+                        ${complaint.complaint_id.substring(0, 8)}...
+                    </button>
+                </td>
+                <td>
+                    <span class="badge-custom" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white;">
+                        ${getCategoryIcon(complaint.category)} ${complaint.category}
+                    </span>
+                </td>
+                <td>
+                    <span class="badge-custom ${getPriorityBadgeClass(complaint.priority)}">
+                        ${getPriorityIcon(complaint.priority)} ${complaint.priority}
+                    </span>
+                </td>
+                <td>
+                    <span class="badge-custom ${getStatusBadgeClass(complaint.status)}">
+                        ${getStatusIcon(complaint.status)} ${complaint.status}
+                    </span>
+                </td>
+                <td style="color: #5a6c7d; font-weight: 500;">${formatDate(complaint.created_at)}</td>
+                <td class="text-center">
+                    ${complaint.blockchain_tx_hash ?
+                        `<i class="fas fa-link" style="color: #28a745; font-size: 1.2rem;" title="Recorded on blockchain"></i>` :
+                        `<i class="fas fa-times" style="color: #dc3545; font-size: 1.2rem;" title="Not on blockchain"></i>`
+                    }
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-custom me-1" onclick="viewComplaint('${complaint.complaint_id}')"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                        <i class="fas fa-eye me-1"></i>View
+                    </button>
+                    <button class="btn btn-sm btn-success" onclick="updateStatus('${complaint.complaint_id}')"
+                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                        <i class="fas fa-edit me-1"></i>Update
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function filterComplaints() {
+        const statusValue = statusFilter.value;
+        const categoryValue = categoryFilter.value;
+        const priorityValue = priorityFilter.value;
+
+        let filtered = currentComplaints;
+
+        if (statusValue) {
+            filtered = filtered.filter(c => c.status === statusValue);
+        }
+        if (categoryValue) {
+            filtered = filtered.filter(c => c.category === categoryValue);
+        }
+        if (priorityValue) {
+            filtered = filtered.filter(c => c.priority === priorityValue);
+        }
+
+        displayComplaints(filtered);
+    }
+
+    function viewComplaint(complaintId) {
+        const complaint = currentComplaints.find(c => c.complaint_id === complaintId);
+        if (!complaint) return;
+
+        selectedComplaintId = complaintId;
+
+        const detailsHtml = `
+            <div style="background: white; border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <strong style="color: #2c3e50;">Complaint ID:</strong><br>
+                            <code style="background: #667eea; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem;">${complaint.complaint_id}</code>
+                        </div>
+                        <div class="mb-3">
+                            <strong style="color: #2c3e50;">Category:</strong><br>
+                            <span class="badge-custom" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%); color: white;">
+                                ${getCategoryIcon(complaint.category)} ${complaint.category}
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <strong style="color: #2c3e50;">Priority:</strong><br>
+                            <span class="badge-custom" ${getPriorityBadgeClass(complaint.priority)}>
+                                ${getPriorityIcon(complaint.priority)} ${complaint.priority}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <strong style="color: #2c3e50;">Status:</strong><br>
+                            <span class="badge-custom" ${getStatusBadgeClass(complaint.status)}>
+                                ${getStatusIcon(complaint.status)} ${complaint.status}
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <strong style="color: #2c3e50;">Submitted:</strong><br>
+                            <span style="color: #5a6c7d;">${formatDate(complaint.created_at)}</span>
+                        </div>
+                        <div class="mb-3">
+                            <strong style="color: #2c3e50;">Blockchain:</strong><br>
+                            ${complaint.blockchain_tx_hash ?
+                                `<span style="color: #28a745;"><i class="fas fa-check-circle me-1"></i> Recorded</span>` :
+                                `<span style="color: #dc3545;"><i class="fas fa-times-circle me-1"></i> Not recorded</span>`
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <h6 style="color: #2c3e50; font-weight: 600; margin-bottom: 1rem;">
+                    <i class="fas fa-file-text me-2" style="color: #667eea;"></i>Complaint Details
+                </h6>
+                <div style="background: white; border-radius: 10px; padding: 1.5rem; border-left: 4px solid #667eea;">
+                    ${complaint.complaint_text || 'No details available'}
+                </div>
+            </div>
+
+            ${complaint.faculty_response ? `
+                <div style="background: #e8f5e8; border-radius: 15px; padding: 1.5rem;">
+                    <h6 style="color: #155724; font-weight: 600; margin-bottom: 1rem;">
+                        <i class="fas fa-reply me-2" style="color: #28a745;"></i>Previous Response
+                    </h6>
+                    <div style="background: white; border-radius: 10px; padding: 1.5rem; border-left: 4px solid #28a745;">
+                        ${complaint.faculty_response}
+                    </div>
+                </div>
+            ` : ''}
+        `;
+
+        document.getElementById('complaintDetails').innerHTML = detailsHtml;
+        document.getElementById('statusSelect').value = complaint.status;
+        document.getElementById('responseText').value = '';
+
+        complaintModal.show();
+    }
+
+    function updateComplaint() {
+        if (!selectedComplaintId) return;
+
+        const newStatus = document.getElementById('statusSelect').value;
+        const responseText = document.getElementById('responseText').value;
+
+        updateComplaintBtn.disabled = true;
+        updateComplaintBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Updating...';
+
+        fetch(`/api/complaints/${selectedComplaintId}/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                status: newStatus,
+                response_text: responseText
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    complaintModal.hide();
+                    loadComplaints(); // Refresh the list
+                    showSuccess('Complaint updated successfully');
+                } else {
+                    showError(data.error || 'Failed to update complaint');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating complaint:', error);
+                showError('Failed to update complaint');
+            })
+            .finally(() => {
+                updateComplaintBtn.disabled = false;
+                updateComplaintBtn.innerHTML = '<i class="fas fa-save me-2"></i>Update Complaint';
+            });
+    }
+
+    function getPriorityBadgeClass(priority) {
+        switch (priority) {
+            case 'urgent': return 'style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white;"';
+            case 'high': return 'style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white;"';
+            case 'medium': return 'style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white;"';
+            case 'low': return 'style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); color: white;"';
+            default: return 'style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); color: white;"';
+        }
+    }
+
+    function getStatusBadgeClass(status) {
+        switch (status) {
+            case 'submitted': return 'style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;"';
+            case 'in_progress': return 'style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white;"';
+            case 'resolved': return 'style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%); color: white;"';
+            case 'closed': return 'style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); color: white;"';
+            default: return 'style="background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); color: white;"';
+        }
+    }
+
+    function getCategoryIcon(category) {
+        switch (category) {
+            case 'academic': return '📚';
+            case 'infrastructure': return '🏢';
+            case 'harassment': return '⚠️';
+            case 'discrimination': return '🚫';
+            case 'administrative': return '📋';
+            case 'general': return '💬';
+            default: return '📝';
+        }
+    }
+
+    function getPriorityIcon(priority) {
+        switch (priority) {
+            case 'urgent': return '🔴';
+            case 'high': return '🟠';
+            case 'medium': return '🟡';
+            case 'low': return '🟢';
+            default: return '⚪';
+        }
+    }
+
+    function getStatusIcon(status) {
+        switch (status) {
+            case 'submitted': return '📝';
+            case 'in_progress': return '⏳';
+            case 'resolved': return '✅';
+            case 'closed': return '🔒';
+            default: return '❓';
+        }
+    }
+
+    function formatDate(dateString) {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    }
+
+    function showSuccess(message) {
+        // Create a beautiful toast notification
+        const toast = document.createElement('div');
+        toast.className = 'position-fixed top-0 end-0 p-3';
+        toast.style.zIndex = '9999';
+        toast.innerHTML = `
+            <div class="toast show" role="alert">
+                <div class="toast-header" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%); color: white; border: none;">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong class="me-auto">Success</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body" style="background: #d4edda; color: #155724;">
+                    ${message}
+                </div>
+            </div>
+        `;
+        document.body.appendChild(toast);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 5000);
+    }
+
+    function showError(message) {
+        // Create a beautiful error toast notification
+        const toast = document.createElement('div');
+        toast.className = 'position-fixed top-0 end-0 p-3';
+        toast.style.zIndex = '9999';
+        toast.innerHTML = `
+            <div class="toast show" role="alert">
+                <div class="toast-header" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; border: none;">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <strong class="me-auto">Error</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body" style="background: #f8d7da; color: #721c24;">
+                    ${message}
+                </div>
+            </div>
+        `;
+        document.body.appendChild(toast);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 5000);
+    }
+
+    // Status update functionality
+    function updateStatus(complaintId) {
+        const complaint = currentComplaints.find(c => c.complaint_id === complaintId);
+        if (!complaint) return;
+
+        document.getElementById('updateComplaintId').value = complaintId;
+        document.getElementById('newStatus').value = complaint.status;
+        document.getElementById('facultyResponse').value = complaint.faculty_response || '';
+
+        new bootstrap.Modal(document.getElementById('statusUpdateModal')).show();
+    }
+
+    function submitStatusUpdate() {
+        const form = document.getElementById('statusUpdateForm');
+        const formData = new FormData(form);
+
+        const data = {
+            complaint_id: formData.get('complaint_id'),
+            status: formData.get('status'),
+            faculty_response: formData.get('faculty_response')
+        };
+
+        if (!data.status) {
+            alert('Please select a status');
+            return;
+        }
+
+        fetch('/api/complaints/update-status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                bootstrap.Modal.getInstance(document.getElementById('statusUpdateModal')).hide();
+                loadComplaints(); // Reload complaints
+                showAlert('Status updated successfully!', 'success');
+            } else {
+                showAlert(result.error || 'Failed to update status', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating status:', error);
+            showAlert('Failed to update status', 'error');
+        });
+    }
+
+    function showAlert(message, type) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`;
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+
+        const container = document.querySelector('.dashboard-container');
+        container.insertBefore(alertDiv, container.firstChild);
+
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 5000);
+    }
+
+    // Character counter for response
+    document.addEventListener('DOMContentLoaded', function() {
+        const responseTextarea = document.getElementById('facultyResponse');
+        const charCount = document.getElementById('responseCharCount');
+
+        if (responseTextarea && charCount) {
+            responseTextarea.addEventListener('input', function() {
+                charCount.textContent = this.value.length;
+            });
+        }
+    });
+
+    // Make functions available globally
+    window.viewComplaint = viewComplaint;
+    window.updateStatus = updateStatus;
+    window.submitStatusUpdate = submitStatusUpdate;
+});
+</script>
+
+<!-- Status Update Modal -->
+<div class="modal fade" id="statusUpdateModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit me-2"></i>Update Complaint Status
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="statusUpdateForm">
+                    <input type="hidden" id="updateComplaintId" name="complaint_id">
+
+                    <div class="mb-3">
+                        <label for="newStatus" class="form-label">
+                            <i class="fas fa-info-circle me-2"></i>New Status
+                        </label>
+                        <select class="form-select" id="newStatus" name="status" required>
+                            <option value="">Select status...</option>
+                            <option value="submitted">📋 Submitted</option>
+                            <option value="in_progress">⚙️ In Progress</option>
+                            <option value="resolved">✅ Resolved</option>
+                            <option value="closed">🔒 Closed</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="facultyResponse" class="form-label">
+                            <i class="fas fa-comment me-2"></i>Faculty Response (Optional)
+                        </label>
+                        <textarea class="form-control" id="facultyResponse" name="faculty_response"
+                                  rows="4" maxlength="1000"
+                                  placeholder="Add your response or update to the student..."></textarea>
+                        <div class="form-text">
+                            <span id="responseCharCount">0</span>/1000 characters
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="submitStatusUpdate()">
+                    <i class="fas fa-save me-2"></i>Update Status
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

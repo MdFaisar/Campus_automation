@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Account - SMVEC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 450px;
+        }
+
+        .college-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .college-logo {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .warning-icon {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+
+        .btn-remove {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-remove:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(220, 53, 69, 0.3);
+            color: white;
+        }
+
+        .btn-remove:disabled {
+            opacity: 0.7;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .loading-spinner {
+            display: none;
+        }
+
+        .form-floating label {
+            color: #6c757d;
+        }
+
+        .warning-text {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: #856404;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-link a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link a:hover {
+            color: #dc3545;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="auth-container">
+            <!-- College Header -->
+            <div class="college-header">
+                <div class="college-logo">
+                    <i class="fas fa-graduation-cap me-2"></i>SMVEC
+                </div>
+                <div class="college-name">Sri Manakula Vinayagar Engineering college</div>
+                <div class="text-muted">Account Removal</div>
+            </div>
+
+            <!-- Warning Container -->
+            <div class="warning-container">
+                <div class="warning-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h4>Remove Account</h4>
+                <p class="text-muted">Permanently delete account and all related data</p>
+            </div>
+
+            <!-- Warning Text -->
+            <div class="warning-text">
+                <i class="fas fa-warning me-2"></i>
+                <strong>Warning:</strong> This action will permanently remove all account data including:
+                <ul class="mt-2 mb-0">
+                    <li>User account information</li>
+                    <li>Pending registrations</li>
+                    <li>OTP requests</li>
+                    <li>Related system data</li>
+                </ul>
+            </div>
+
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+
+            <!-- Remove Account Form -->
+            <form id="removeAccountForm">
+                <div class="mb-3">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" name="email" required 
+                               placeholder="Enter email to remove" value="btechit231083@smvec.ac.in">
+                        <label for="email">
+                            <i class="fas fa-envelope me-2"></i>Email Address to Remove
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-remove" id="removeBtn">
+                    <span class="btn-text">
+                        <i class="fas fa-trash me-2"></i>Remove Account
+                    </span>
+                    <span class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin me-2"></i>Removing...
+                    </span>
+                </button>
+            </form>
+
+            <!-- Back Link -->
+            <div class="back-link">
+                <a href="/register">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Registration
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission
+        document.getElementById('removeAccountForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            
+            if (!email) {
+                showAlert('Please enter an email address', 'warning');
+                return;
+            }
+            
+            if (!email.endsWith('@smvec.ac.in')) {
+                showAlert('Only SMVEC email addresses can be removed', 'danger');
+                return;
+            }
+            
+            // Confirm removal
+            if (!confirm(`Are you sure you want to remove the account: ${email}?\n\nThis action cannot be undone!`)) {
+                return;
+            }
+            
+            const removeBtn = document.getElementById('removeBtn');
+            const btnText = removeBtn.querySelector('.btn-text');
+            const loadingSpinner = removeBtn.querySelector('.loading-spinner');
+            
+            removeBtn.disabled = true;
+            btnText.style.display = 'none';
+            loadingSpinner.style.display = 'inline';
+            
+            fetch('/api/remove-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    showAlert(result.message, 'success');
+                    
+                    // Show removed items
+                    if (result.removed_items && result.removed_items.length > 0) {
+                        const itemsList = result.removed_items.join(', ');
+                        showAlert(`Removed items: ${itemsList}`, 'info');
+                    }
+                    
+                    // Clear form and redirect after delay
+                    setTimeout(() => {
+                        document.getElementById('email').value = '';
+                        showAlert('Account removal completed. You can now register again.', 'success');
+                    }, 2000);
+                    
+                } else {
+                    showAlert(result.error, 'danger');
+                }
+            })
+            .catch(error => {
+                console.error('Account removal error:', error);
+                showAlert('Account removal failed. Please try again.', 'danger');
+            })
+            .finally(() => {
+                removeBtn.disabled = false;
+                btnText.style.display = 'inline';
+                loadingSpinner.style.display = 'none';
+            });
+        });
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            alertContainer.appendChild(alertDiv);
+            
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

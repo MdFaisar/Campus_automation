@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found - SMVEC</title>
+    <style>
+        :root {
+            --primary-blue: #36429B;
+            --light-blue: #E3F2FD;
+            --gold-primary: #DBA328;
+            --gold-secondary: #FEC412;
+            --white: #FFFFFF;
+            --dark-gray: #212121;
+            --light-gray: #e9ecef;
+            --gray: #6c757d;
+            --shadow: 0 2px 8px rgba(54, 66, 155, 0.1);
+            --shadow-hover: 0 4px 16px rgba(54, 66, 155, 0.15);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--light-blue) 0%, #f0f8ff 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .error-container {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            text-align: center;
+            max-width: 500px;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), #4a5bb8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            margin: 1rem 0;
+            font-weight: 600;
+        }
+        
+        .error-description {
+            color: var(--gray);
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+        
+        .college-name {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            background: linear-gradient(135deg, var(--primary-blue), #4a5bb8);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .icon {
+            font-size: 4rem;
+            color: var(--gold-secondary);
+            margin-bottom: 1rem;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="error-container">
+        <div class="icon">
+            <i class="fas fa-university"></i>
+        </div>
+        <h1 class="error-code">404</h1>
+        <h2 class="error-message">Page Not Found</h2>
+        <p class="college-name">Sri Manakula Vinayagar Engineering College</p>
+        <p class="error-description">
+            The page you're looking for doesn't exist or has been moved. Please check the URL or navigate back to the main page.
+        </p>
+        <a href="/" class="btn">
+            <i class="fas fa-home"></i> Go Back Home
+        </a>
+    </div>
+</body>
+</html>

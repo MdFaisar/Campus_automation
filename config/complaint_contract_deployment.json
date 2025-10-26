@@ -1,0 +1,11 @@
+{
+  "contract_address": "0x969aCEb172522d1d5aFd5F25b15EA34f877D9645",
+  "transaction_hash": "0x317ef075896e8b48aeb32c3275e22d32156a1142c0bcdfa4c858070947524387",
+  "block_number": 9047548,
+  "gas_used": 1820416,
+  "deployment_timestamp": 9047548,
+  "network_info": {
+    "chain_id": 9047548,
+    "rpc_url": "https://sepolia.infura.io/v3/3e21b4c4aeda4f8bbd8327c6ff253888"
+  }
+}

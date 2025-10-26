@@ -1,0 +1,300 @@
+{
+  "documents": [
+    {
+      "id": 0,
+      "filename": "Blue_and_White_Modern_Professional_Resume_3.pdf",
+      "file_path": "uploads\\notes\\general\\Blue_and_White_Modern_Professional_Resume_3.pdf",
+      "upload_date": "2025-10-14 12:15:32.395963",
+      "chunk_count": 2
+    },
+    {
+      "id": 1,
+      "filename": "CN_RECORD.pdf",
+      "file_path": "uploads\\notes\\general\\CN_RECORD.pdf",
+      "upload_date": "2025-10-14 12:19:45.639894",
+      "chunk_count": 33
+    },
+    {
+      "id": 2,
+      "filename": "Aptitude_Questions_Answers_Explained.pdf",
+      "file_path": "uploads\\notes\\general\\Aptitude_Questions_Answers_Explained.pdf",
+      "upload_date": "2025-10-26 17:59:47.493914",
+      "chunk_count": 4
+    }
+  ],
+  "chunks": [
+    {
+      "doc_id": 0,
+      "chunk_id": 0,
+      "text": "EXPERIENCE:\nAREA OF INTEREST:NAZEYABANU A\nCAREER OBJECTIVE: 7418580662\nnazeyabanu3@gmail.com\nMudaliarpet,\nPuducherry -605004.\nEDUCATION\nUnder Graduated in commerce (C.S)\nAcademic Excellence in commerce.Post Graduated in commerce(C.S) \nAcademic Excellence in commerce \nBachelor Of Commerce(C.S) \nBharathidasan Govt.college for\nwomen (2016-2019)   Master Of Commerce(C.S)\nBharathidasan Govt.college for\nwomen(2019 - 2021)\nSOFT SKILL\nLeadership Qualities \nTeam Work\nDecision MakingTo be part of a renowned organisation where I can apply\nmy technical skills and behavioural skills for the\ndevelopment of the organisation and also enhance my\nknowledge.\n ➢Company Law➢AccountingWORKSHOP ATTENDED:\n        ➢  Waste Management Practices\n➢ Gender sensitisation➢ Women in Nation Building \n➢ Environment protection  and climate change              ➢Personality Development  and  Career PlanningINTERNSHIP: \nAttended intership in \"The Pondicherry\nCo-op Urban Bank ltd\" as I trained from\n(17.12.2018 - 16.01.",
+      "filename": "Blue_and_White_Modern_Professional_Resume_3.pdf",
+      "chunk_index": 0
+    },
+    {
+      "doc_id": 0,
+      "chunk_id": 1,
+      "text": "otection  and climate change              ➢Personality Development  and  Career PlanningINTERNSHIP: \nAttended intership in \"The Pondicherry\nCo-op Urban Bank ltd\" as I trained from\n(17.12.2018 - 16.01.2019)H.S.C\nSeventh-Day Adventist Higher\nSecondary School (2015-2016)\nPercentage - 88% Percentage - 76% \nPercentage - 64% \nS.S.L.C\nSeventh-Day Adventist Higher\nSecondary School (2013-2014)\nPercentage - 69% \nHDCA (Honours of Diploma in\nComputer Application)Accountant:\n1.Mother herbal Remedies \n       (19-06-2024 - present)\nInvoice processor:\n2.Datamatics Global services Ltd. \n        (19-03-2022-14-11-2022)ACCONTANT\nLANGUAGES\nEnglish\nHindi\nTamil ➢ Women Entrepreneurship",
+      "filename": "Blue_and_White_Modern_Professional_Resume_3.pdf",
+      "chunk_index": 1
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 2,
+      "text": "PROGRAM:  \npublic class ParityChecker  \n{  \npublic static boolean hasEvenParity(String binary)  \n{  \nint count = 0;   \n // Count the number of 1s in the binary string  \nfor (char bit : binary.toCharArray())  \n{  \nif (bit == '1')  \n{  \ncount++;  \n}  \n}      \n// If count of 1s is even, it has even parity  \nreturn count % 2 == 0;  \n}  \npublic static boolean hasOddParity(String binary)  \n{  \nreturn !hasEvenParity(binary);  \n} \npublic static char generateEvenParityBit(String binary)  \n{  \nreturn hasEvenParity(binary) ? '0' : '1';  \n}  \npublic static char generateOddParityBit(String binary)  \n{  \nreturn hasEvenParity(binary) ? '1' : '0';  \n}  \npublic static void main(String[] args)  \n{ \nString[] testNumbers = { \"1010\", \"1011\", \"1111\", \"1000\" };  \nfor (String binary : testNumbers)  \n{  \nSystem.out.println(\" \\nTesting binary number: \" + binary); \nSystem.out.println(\"Even parity: \" + asEvenParity(binary)); \nSystem.out.println(\"Odd parity: \" + hasOddParity(binary)); \nSystem.out.",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 0
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 3,
+      "text": ")  \n{  \nSystem.out.println(\" \\nTesting binary number: \" + binary); \nSystem.out.println(\"Even parity: \" + asEvenParity(binary)); \nSystem.out.println(\"Odd parity: \" + hasOddParity(binary)); \nSystem.out.println(\"Even parity bit needed: \"+generateEvenParityBit(binary));  \nSystem.out.println(\"Odd parity bit needed: \" + generateOddParityBit(binary));  \n} \n}  \n} \n \n \n \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java program to implement binary parity checker was executed successfully and the \noutput is verified.  \n\nPROGRAM:  \nimport java.util.*;  \nclass CRCExample  \n{  \n public static void main(String args[])  \n{ \nScanner scan = new Scanner(System.in);  \nint size;  \nSystem.out.println(\"Enter the size of the data array: \");  \nsize = scan.nextInt();  \nint data[] = new int[size];  \nSystem.out.print(\"Enter data bits in the array one by one:  \");   \nfor(int i = 0 ; i < size ; i++)  \n{  \nSystem.out.println(\"Enter bit \" + (size -i) + \":\");  \ndata[i] = scan.nextInt();  \n} \nSystem.out.pr",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 1
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 4,
+      "text": "tem.out.print(\"Enter data bits in the array one by one:  \");   \nfor(int i = 0 ; i < size ; i++)  \n{  \nSystem.out.println(\"Enter bit \" + (size -i) + \":\");  \ndata[i] = scan.nextInt();  \n} \nSystem.out.println(\"Enter the size of the divisor array:\");  \nsize = scan.nextInt();  \nint divisor[] = new int[size];  \nSystem.out.print ln(\"Enter divisor bits in array one by one: \");  \nfor(int i = 0 ; i < size ; i++)  \n{  \nSystem.out.println(\"Enter bit \" + (size -i) + \":\");  \ndivisor[i] = scan.nextInt();  \n} \nint rem[] = divideDataWithDivisor(data, divisor);  \nfor(int i = 0; i < rem.length -1; i++)  \n{  \nSystem.out.print(rem[i]);  \n}  \nSystem.out.println(\" \\nGenerated CRC code is: \");  \nfor(int i = 0; i < data.length; i++)  \n{  \nSystem.out.print(data[i]);  \n}  \nfor(int i = 0; i < rem.length -1; i++)  \n{  \nSystem.out.print(rem[i]);  \n} \nSystem.out.println();  \nint sentData[] = new int[data.length + rem.length - 1];  \nSystem.out.println(\"Enter bits in the array which you want to send: \");  \nfor(int i =",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 2
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 5,
+      "text": "System.out.print(rem[i]);  \n} \nSystem.out.println();  \nint sentData[] = new int[data.length + rem.length - 1];  \nSystem.out.println(\"Enter bits in the array which you want to send: \");  \nfor(int i = 0; i < sentData.length; i++)  \n{  \nSystem.out.print(\"Enter bit \"+(sentData.length -1)+ \":\"); sentData[i] = \nscan.nextInt();  \n}  \nreceiveData(sentData, divisor);  \n} \nstatic int[] divideDataWithDivisor(int oldData[], int divisor[])  \n{  \nint rem[] = new int[divisor.length];  \nint i;  \nint data[] = new int[oldData.length + divisor.length]; System.arraycopy(oldData, \n0, data, 0, oldData.length); System.arraycopy(data, 0, rem, 0, divisor.length);  \nfor(i = 0; i < oldData.length; i++)  \n{  \nSystem.out.println((i+1) +\".) First data bit is :\"+ rem[0]); \nSystem.out.print(\"Remainder : \");  \n \n \nif(rem[0] == 1)  \n{  \nfor(int j = 1; j < divisor.length; j++)  \n{  \nrem[j -1] = exorOperation(rem[j], divisor[j]); \nSystem.out.print(rem[j -1]);  \n} \n}  \nelse  \n{ \nfor(int j = 1; j < divisor.length; j++)",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 3
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 6,
+      "text": "m[0] == 1)  \n{  \nfor(int j = 1; j < divisor.length; j++)  \n{  \nrem[j -1] = exorOperation(rem[j], divisor[j]); \nSystem.out.print(rem[j -1]);  \n} \n}  \nelse  \n{ \nfor(int j = 1; j < divisor.length; j++)  \n{  \nrem[j -1] = exorOperation(rem[j], 0); \nSystem.out.print(rem[j -1]); \n} \n}  \nrem[divisor.length -1] = data[i+divisor.length]; \nSystem.out.println(rem[divisor.length -1]);  \n}  \nreturn rem;  \n} \nstatic int exorOperation(int x, int y)  \n{  \nif(x == y)  \n{ \nreturn 0;  \n}  \nreturn 1;  \n} \nstatic void receiveData(int data[], int divisor[])  \n{ \nint rem[] = divideDataWithDivisor(data, divisor);  \nfor(int i = 0; i < rem.length; i++)  \n{  \nif(rem[i] != 0)  \n{  \nSystem.out.println(\"Currupted data received...\"); return;  \n} \n} \nSystem.out.println(\"Data received without any error.\");  \n} \n} \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \n \n \n \nRESULT:  \nThus the Java program to implement Simple  Cyclic Redudancy Check  was executed successfully \nand the output was verified . \n\nPROGRAM:  \nimport",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 4
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 7,
+      "text": "OUTPUT:  \n \n \n \n \nRESULT:  \nThus the Java program to implement Simple  Cyclic Redudancy Check  was executed successfully \nand the output was verified . \n\nPROGRAM:  \nimport java.util.Scanner;  \npublic class CheckSum  \n{ \npublic static int calculateChecksum(int[] data, int blockSize)  \n{  \nint sum = 0;  \nfor (int block : data)  \n{  \nsum += block;  \nif (sum >= (1 << blockSize))  \n{  \nsum = (sum % (1 << blockSize)) + 1;  \n}  \n}  \nreturn (~sum) & ((1 << blockSize) - 1);  \n} \npublic static boolean verifyChecksum(int[] data, int blockSize, int receivedChecksum)  \n{  \nint sum = calculateChecksum(data, blockSize) + receivedChecksum;  \nif (sum >= (1 << blockSize))  \n{  \nsum = (sum % (1 << blockSize)) + 1;  \n}  \nreturn sum == ((1 << blockSize) - 1); \n}  \npublic static void main(String[] args)  \n{  \nScanner scanner = new Scanner(System.in);  \nSystem.out.println(\"Enter the block size (in bits): \");  \nint blockSize = scanner.nextInt();  \nSystem.out.println(\"Enter the numb",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 5
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 8,
+      "text": "main(String[] args)  \n{  \nScanner scanner = new Scanner(System.in);  \nSystem.out.println(\"Enter the block size (in bits): \");  \nint blockSize = scanner.nextInt();  \nSystem.out.println(\"Enter the number of data blocks: \");  \nint n = scanner.nextInt();  \nint[] data = new int[n];  \nSystem.out.println(\"Enter the data blocks (in decimal): \");  \nfor (int i = 0; i < n; i++)  \n{  \ndata[i] = scanner.nextInt();  \n}  \nint checksum = calculateChecksum(data, blockSize); \nSystem.out.println(\"Calculated Checksum: \" + checksum);  \nSystem.out.print(\"Enter the received checksum to verify: \"); int \nreceivedChecksum = scanner.nextInt();  \nboolean isValid = verifyChecksum(data, blockSize, receivedChecksum);  \nif (isValid)  \n{  \nSystem.out.println(\"Checksum verification successful. Data is valid.\");  \n} \nelse  \n{  \nSystem.out.println(\"Checksum verification failed. Data is corrupted.\");  \n}  \nscanner.close();  \n}  \n} \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nOUTPUT:",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 6
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 9,
+      "text": "{  \nSystem.out.println(\"Checksum verification failed. Data is corrupted.\");  \n}  \nscanner.close();  \n}  \n} \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java program to implement checksum was executed Successfully and Output was \nverified.  \n \n\nPROGRAM:  \nimport java.util.Scanner;  \npublic class Main  \n{ \npublic static String characterFraming(String data)  \n{   \nreturn \"SOH\" + data + \"EOT\";  \n} \npublic static String characterStuffing(String data)  \n{  \nString flag = \"FLAG\";  \nString esc = \"ESC\";  \ndata = data.replace(flag, esc + flag).replace(esc, esc + esc);  \nreturn flag + data + flag;  \n}  \npublic static String bitStuffing(String data)  \n{  \nStringBuilder stuffedData = new StringBuilder();  \nint consecutiveOnes = 0;  \nfor (char bit : data.toCharArray())  \n{  \nif (bit == '1')  \n{ \nconsecutiveOnes++;  \nstuffedData.append(bit);  \nif (consecutiveOnes == 5)  \n{  \nstuffedData.append",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 7
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 10,
+      "text": "uilder();  \nint consecutiveOnes = 0;  \nfor (char bit : data.toCharArray())  \n{  \nif (bit == '1')  \n{ \nconsecutiveOnes++;  \nstuffedData.append(bit);  \nif (consecutiveOnes == 5)  \n{  \nstuffedData.append('0');  \nconsecutiveOnes = 0;  \n}  \n} \nelse  \n{  \nconsecutiveOnes = 0;  \nstuffedData.append(bit);  \n}  \n}  \nreturn stuffedData.toString();  \n} \npublic static String bitDestuffing(String stuffedData)  \n{  \nStringBuilder originalData = new StringBuilder();  \nint consecutiveOnes = 0;  \nfor (char bit : stuffedData.toCharArray())  \n{  \nif (bit == '1')  \n{  \nconsecutiveOnes++;  \noriginalData.append(bit);  \n}  \nelse  \n{  \nif (consecutiveOnes == 5)  \n{  \nconsecutiveOnes = 0;  \ncontinue;  \n} \nconsecutiveOnes = 0;  \noriginalData.append(bit);  \n} \n}  \nreturn originalData.toString();  \n}  \npublic static void main(String[] args)  \n{ \nScanner scanner = new Scanner(System.in);  \nSystem.out.println(\"Enter the data: \");  \nString data = scanner.nextLine();  \n \n// Character Framing  \nString characterFramedDa",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 8
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 11,
+      "text": "oid main(String[] args)  \n{ \nScanner scanner = new Scanner(System.in);  \nSystem.out.println(\"Enter the data: \");  \nString data = scanner.nextLine();  \n \n// Character Framing  \nString characterFramedData = characterFraming(data); \nSystem.out.println(\"Character Framed Data: \" + characterFramedData);  \n// Character Stuffing  \nString characterStuffedData = characterStuffing(data); \nSystem.out.println(\"Character Stuffed Data: \" + characterStuffedData);  \n \n// Bit Stuffing  \nSystem.out.println(\"Enter binary data for Bit Stuffing: \");  \nString binaryData = scanner.nextLine();  \nString bitStuffedData = bitStuffing(binaryData);  \nSystem.out.println(\"Bit Stuffed Data: \" + bitStuffedData);  \n \n// Bit Destuffing  \nString bitDestuffedData = bitDestuffing(bitStuffedData);  \nSystem.out.println(\"Bit Destuffed Data: \" + bitDestuffedData);  \nscanner.close();  \n} \n} \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the java program for the data link layer framing m",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 9
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 12,
+      "text": "ffed Data: \" + bitDestuffedData);  \nscanner.close();  \n} \n} \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the java program for the data link layer framing methods such as character stuffing and bit \nstuffing was executed successfully and Output was verified.  \n \n\n \nPROGRAM:  \nimport java.util.Scanner;  \npublic class CRCPolynomials  \n{  \npublic static int computeCRC(String data, int polynomial, int width)  \n{  \nint crc = 0;  \nint mask = (1 << width) - 1; \nfor (char ch : data.toCharArray())  \n{  \ncrc ^= ch << (width - 8);  \nfor (int i = 0; i < 8; i++)  \n{  \nif ((crc & (1 << (width - 1))) != 0)  \n{  \ncrc = (crc << 1) ^ polynomial;  \n}  \nelse  \n{  \ncrc <<= 1;  \n}  \ncrc &= mask;  \n}  \n}  \nreturn crc;  \n} \npublic static void main(String[] args)  \n{  \nScanner scanner = new Scanner(System.in);  \nint crc12Poly = 0x80F;  \nint crc16Poly = 0x8005;  \nint crcCCITTPoly = 0x1021;  \nSystem.out.print(\"Enter the data string: \");  \nString data = scanner.nextLine",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 10
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 13,
+      "text": "canner scanner = new Scanner(System.in);  \nint crc12Poly = 0x80F;  \nint crc16Poly = 0x8005;  \nint crcCCITTPoly = 0x1021;  \nSystem.out.print(\"Enter the data string: \");  \nString data = scanner.nextLine();  \nint crc12 = computeCRC(data, crc12Poly, 12);  \nint crc16 = computeCRC(data, crc16Poly, 16);  \nint crcCCITT = computeCRC(data, crcCCITTPoly, 16);  System.out.printf(\"CRC -12: \n%03X \\n\", crc12);  \nSystem.out.printf(\"CRC -16: %04X \\n\", crc16);  \nSystem.out.printf(\"CRC -CCITT: %04X \\n\", crcCCITT);  \nscanner.close();  \n}  \n} \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java program for the Data Set of Characters of the three CRC polynomials – CRC 12, \nCRC 16 and CRC CCIP was executed successfully and output was verified.  \n \n \n\nPROGRAM:  \nProgram: import java.util.*;  \nclass Graph  \n{  \nprivate int vertices;  \nprivate List<List> adjList;  \npublic Graph(int vertices)  \n{  \nthis.vertices = vertices;  \nadjList = new ArrayList<>();  \nfor (i",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 11
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 14,
+      "text": "rogram: import java.util.*;  \nclass Graph  \n{  \nprivate int vertices;  \nprivate List<List> adjList;  \npublic Graph(int vertices)  \n{  \nthis.vertices = vertices;  \nadjList = new ArrayList<>();  \nfor (int i = 0; i < vertices; i++)  \n{  \nadjList.add(new ArrayList<>());  \n}  \n}  \npublic void addEdge(int source, int target, int weight)  \n{ \n adjList.get(source).add(new Node(target, weight));  \n}  \npublic void dijkstra(int startVertex)  \n{  \nPriorityQueue pq = new PriorityQueue<>(Comparator.comparingInt(node -> \nnode.cost));  \nint[] distances = new int[vertices];  \nArrays.fill(distances, Integer.MAX_VALUE);  \ndistances[startVertex] = 0;  \npq.add(new Node(startVertex, 0));  \nwhile (!pq.isEmpty())  \n{  \nNode currentNode = pq.poll();  \nint currentVertex = currentNode.vertex;  \n \nfor (Node neighbor : adjList.get(currentVertex))  \n{  \nint newDist = distances[currentVertex] + neighbor.cost;  \nif (newDist < distances[neighbor.vertex])  \n{  \ndistances[neighbor.vertex] = newDist; pq.add(new \nNode(nei",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 12
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 15,
+      "text": ": adjList.get(currentVertex))  \n{  \nint newDist = distances[currentVertex] + neighbor.cost;  \nif (newDist < distances[neighbor.vertex])  \n{  \ndistances[neighbor.vertex] = newDist; pq.add(new \nNode(neighbor.vertex, newDist));  \n}  \n}  \n}  \nprintShortestPaths(startVertex, distances);  \n}  \nprivate void printShortestPaths(int startVertex, int[] distances)  \n{  \nSystem.out.println(\"Shortest paths from vertex \" + startVertex + \":\");  \nfor (int i = 0; i < distances.length; i++)  \n{  \nSystem.out.println(\"To vertex \" + i + \" -> Distance: \" + distances[i]);  \n}  \n}  \nstatic class Node  \n{  \nint vertex;  \nint cost;  \npublic Node(int vertex, int cost)  \n{  \nthis.vertex = vertex;  \nthis.cost = cost;  \n}  \n}  \n}  \npublic class ShortestPath  \n{  \npublic static void main(String[] args)  \n{  \nGraph graph = new Graph(6);  \ngraph.addEdge(0, 1, 4);  \ngraph.addEdge(0, 2, 4);  \ngraph.addEdge(1, 2, 2);  \ngraph.addEdge(1, 3, 5);  \ngraph.addEdge(2, 3, 8);  \ngraph.addEdge(3, 4, 6);  \ngraph.addEdge(4, 5, 9);",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 13
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 16,
+      "text": "= new Graph(6);  \ngraph.addEdge(0, 1, 4);  \ngraph.addEdge(0, 2, 4);  \ngraph.addEdge(1, 2, 2);  \ngraph.addEdge(1, 3, 5);  \ngraph.addEdge(2, 3, 8);  \ngraph.addEdge(3, 4, 6);  \ngraph.addEdge(4, 5, 9);  \ngraph.dijkstra(0);  \n}  \n} \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java Program for the Shortest Path Protocol using Dijkstra’s Algorithm was successfully \nexecuted and output was verified.  \n\nPROGRAM:  \npublic class SimpleStringEncryption  \n{  \nprivate static final int SHIFT_KEY = 3;  \npublic static String encrypt(String input)  \n{  \nStringBuilder encrypted = new StringBuilder();  \nfor (char c : input.toCharArray())  \n{  \nencrypted.append((char) (c + SHIFT_KEY));  \n}  \nreturn encrypted.toString();  \n} \npublic static String decrypt(String input)  \n{  \nStringBuilder decrypted = new StringBuilder();  \nfor (char c : input.toCharArray())  \n{ \ndecrypted.append((char) (c - SHIFT_KEY));  \n}  \nreturn decrypted.toString()",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 14
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 17,
+      "text": "String decrypt(String input)  \n{  \nStringBuilder decrypted = new StringBuilder();  \nfor (char c : input.toCharArray())  \n{ \ndecrypted.append((char) (c - SHIFT_KEY));  \n}  \nreturn decrypted.toString();  \n}  \npublic static void main(String[] args)  \n{  \nString originalString = \"HelloWorld123\";  \nSystem.out.println(\"Original String: \" + originalString);  \nString encryptedString = encrypt(originalString);  \nSystem.out.println(\"Encrypted String: \" + encryptedString);  \nString decryptedString = decrypt(encryptedString); \nSystem.out.println(\"Decrypted String: \" + decryptedString);  \n}  \n} \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java program for String Encryption and Decryption using Caesar Cipher was executed \nsuccessfully and output was verified  \n \n\nPROGRAM:  \n \n// Echo  Server   \nimport java.io.*;  \nimport java.net.*;  \npublic class EchoServer  \n{  \npublic static void main(String[] args)  \n{  \nint port = 12345",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 15
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 18,
+      "text": "sfully and output was verified  \n \n\nPROGRAM:  \n \n// Echo  Server   \nimport java.io.*;  \nimport java.net.*;  \npublic class EchoServer  \n{  \npublic static void main(String[] args)  \n{  \nint port = 12345;  \ntry (ServerSocket serverSocket = new ServerSocket(port))  \n{  \nSystem.out.println(\"Server is listening on port \" + port); while (true)  \n{ \nSocket socket = serverSocket.accept(); System.out.println(\"New \nclient connected\");  \nnew ClientHandler(socket).start();  \n}  \n}  \ncatch (IOException ex)  \n{  \nSystem.out.println(\"Server exception: \"+ ex.getMessage());  \nex.printStackTrace();  \n}  \n}  \n}  \nclass ClientHandler extends Thread  \n{  \nprivate Socket socket;  \n \n \npublic ClientHandler(Socket socket)  \n{  \nthis.socket = socket;  \n}  \npublic void run()  \n{  \ntry (InputStream input = socket.getInputStream(); BufferedReader reader = new \nBufferedReader(new InputStreamReader(input));  \nOutputStream output = socket.getOutputStream(); PrintWriter writer = new \nPrintWriter(output, true))  \n{  \nS",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 16
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 19,
+      "text": "InputStream(); BufferedReader reader = new \nBufferedReader(new InputStreamReader(input));  \nOutputStream output = socket.getOutputStream(); PrintWriter writer = new \nPrintWriter(output, true))  \n{  \nString text;  \nwhile ((text = reader.readLine()) != null)  \n{  \nSystem.out.println(\"Received: \" + text); // writer.println(\"Server: \" \n+ text);  \nif (\"bye\".equalsIgnoreCase(text))  \n{  \nSystem.out.println(\"Client disconnected\"); break;  \n}  \n}  \n}  \ncatch (IOException ex)  \n{  \nSystem.out.println(\"Server exception: \" + ex.getMessage());  \nex.printStackTrace();  \n} \n}  \n} \n \n//Echo Client  \n \nimport java.io.*;  \nimport java.net.*;  \npublic class EchoClient  \n{ \n public static void main(String[] args)  \n{  \nString hostname = \"localhost\";  \nint port = 12345;  \ntry (Socket socket = new Socket(hostname, port); OutputStream output = \nsocket.getOutputStream(); PrintWriter writer = new PrintWriter(output, true); \nInputStream input = socket.getInputStream(); BufferedReader reader = new \nBufferedRead",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 17
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 20,
+      "text": "ame, port); OutputStream output = \nsocket.getOutputStream(); PrintWriter writer = new PrintWriter(output, true); \nInputStream input = socket.getInputStream(); BufferedReader reader = new \nBufferedReader(new InputStreamRead er(input)); BufferedReader consoleReader \n= new BufferedReader(new InputStreamReader(System.in))) {  \nSystem.out.println(\"Connected to the server\");  \nString text;  \ndo  \n{  \nSystem.out.print(\"Enter message: \");  \ntext = consoleReader.readLine();  \nwriter.println(text);  \nString response = reader.readLine(); System.out.println(response);  \n}while (!\"bye\".equalsIgnoreCase(text));  \n}  \ncatch (UnknownHostException ex)  \n{  \nSystem.out.println(\"Server not found: \" + ex.getMessage());  \n}  \ncatch (IOException ex)  \n{  \nSystem.out.println(\"I/O error: \" + ex.getMessage());  \n}  \n}  \n} \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \nECHO SERVER:  \n \n \nECHO CLIENT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThe Java p",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 18
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 21,
+      "text": "}  \n} \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \nECHO SERVER:  \n \n \nECHO CLIENT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThe Java program Application Using TCP Sockets like Echo client and echo server was Executed \nsuccessfully and output was verified.  \n\nPROGRAM:  \n//Chat server  \nimport java.io.*;  \nimport java.net.*;  \npublic class ChatServer  \n{  \n     public static void main(String[] args)  \n          { \n     try (ServerSocket serverSocket = new ServerSocket(12345))  \n                    { \n      System.out.println(\"Server is running on port 12345...\");  \n      Socket clientSocket = serverSocket.accept();  \n      System.out.println(\"Client connected!\");  \n      BufferedReader in = new BufferedReader(new   \n      InputStreamReader(clientSocket.getInputStream()));    \n      PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);  \n      BufferedReader serverInput = new BufferedReader(new  \n      In",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 19
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 22,
+      "text": "tStreamReader(clientSocket.getInputStream()));    \n      PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);  \n      BufferedReader serverInput = new BufferedReader(new  \n      InputStreamReader(System.in));  \n      String message;  \n      while (true)   \n      {   \n   message = in.readLine();  \n   if (message.equalsIgnoreCase(\"exit\"))  \n   {  \nSystem.out.println(\"Client disconnected.\");  \nbreak;  \n   }  \n   System.out.println(\"Client: \" + message);   \n   System.out.print(\"Server: \");  \n   message = serverInput.readLine();     \n   out.println(message);  \n   if (message.equalsIgnoreCase(\"exit\"))  \n   {  \n  System.out.println(\"Server closed the connection.\");     \n  break;  \n   } \n     } clientSocket.close();          \n                   }  \n                   catch (IOException e)  \n                   {  \n                         System.err.println(\"Error in server: \" + e.getMessage());  \n                   }  \n          } \n} \n//Chat Client  \n \nimport java.io.*;  \ni",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 20
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 23,
+      "text": "xception e)  \n                   {  \n                         System.err.println(\"Error in server: \" + e.getMessage());  \n                   }  \n          } \n} \n//Chat Client  \n \nimport java.io.*;  \nimport java.net.*;  \npublic class ChatClient  \n{  \npublic static void main(String[] args)  \n{  \ntry (Socket socket = new Socket(\"localhost\", 12345))  \n{  \nSystem.out.println(\"Connected to the server!\");    \nBufferedReader in = new BufferedReader(new \nInputStreamReader(socket.getInputStream()));  \nPrintWriter out = new PrintWriter(socket.getOutputStream(), true); \nBufferedReader clientInput = new BufferedReader(new \nInputStreamReader(System.in));  \nString message;  \nwhile (true)  \n{   \nSystem.out.print(\"Client: \");  \nmessage = clientInput.readLine(); out.println(message);  \nif (message.equalsIgnoreCase(\"exit\"))  \n{  \nSystem.out.println(\"Client closed the connection.\");  \nbreak;  \n} \nmessage = in.readLine();  \nif (message.equalsIgnoreCase(\"exit\"))  \n{  \nSystem.out.println(\"Server disconnected",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 21
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 24,
+      "text": "oreCase(\"exit\"))  \n{  \nSystem.out.println(\"Client closed the connection.\");  \nbreak;  \n} \nmessage = in.readLine();  \nif (message.equalsIgnoreCase(\"exit\"))  \n{  \nSystem.out.println(\"Server disconnected.\");  \n  break;  \n }  \nSystem.out.println(\"Server: \" + message);  \n}  \n}  \ncatch (IOException e)  \n{  \nSystem.err.println(\"Error in client: \" + e.getMessage());  \n}  \n}  \n} \n \n \n \nOUPUT:  \n \nCHAT SERVER:  \n \n \nCHAT CLIENT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThe Java program Application Using TCP Sockets like Chat client and server was Executed \nsuccessfully and output was verified.  \n\nPROGRAM:  \n \nServer code:  \nimport java.io.*;  \nimport java.net.ServerSocket;  \nimport java.net.Socket;  \npublic class FileServer  \n{  \nprivate static final int PORT = 65432;  \npublic static void main(String[] args)  \n{  \ntry (ServerSocket serverSocket = new ServerSocket(PORT))  \n{  \nSystem.out.println(\"Server listening on port \" + PORT);  \nwhile (true)  \n{ \nSocket clientSocket = serverSo",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 22
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 25,
+      "text": "void main(String[] args)  \n{  \ntry (ServerSocket serverSocket = new ServerSocket(PORT))  \n{  \nSystem.out.println(\"Server listening on port \" + PORT);  \nwhile (true)  \n{ \nSocket clientSocket = serverSocket.accept(); \nSystem.out.println(\"Connection from \" + \nclientSocket.getInetAddress());  \ntry (InputStreamin=clientSocket.getInputStream(); \nDataInputStream dis = new DataInputStream(in)) {  \nString fileName = dis.readUTF();  \nFile file = new File(fileName);  \ntry (FileOutputStream fos = new FileOutputStream(file))  \n{  \nbyte[] buffer = new byte[4096];  \nint bytesRead;  \nwhile ((bytesRead = dis.read(buffer)) != -1)  \n{  \nfos.write(buffer, 0, bytesRead);  \n} \n System.out.println(\"File \" + fileName + \" received \nsuccessfully.\");  \n}  \n}  \ncatch (IOException e)  \n{  \nSystem.err.println(\"Error during file transfer: \" + \ne.getMessage());  \n}  \n}  \n}  \ncatch (IOException e)  \n{  \nSystem.err.println(\"Server error: \" + e.getMessage());  \n}  \n}  \n} \n \nCLIENT CODE:  \nimport java.io.*;  \nimport java",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 23
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 26,
+      "text": "ring file transfer: \" + \ne.getMessage());  \n}  \n}  \n}  \ncatch (IOException e)  \n{  \nSystem.err.println(\"Server error: \" + e.getMessage());  \n}  \n}  \n} \n \nCLIENT CODE:  \nimport java.io.*;  \nimport java.net.Socket;  \npublic class FileClient  \n{  \nprivate static final String SERVER_ADDRESS = \"127.0.0.1\";  \nprivate static final int PORT = 65432;  \npublic static void main(String[] args)  \n{  \nif (args.length < 1)  \n{  \nSystem.out.println(\"Usage: java FileClient \");  \nreturn;  \n}  \nString filePath = args[0];  \ntry (Socket socket = new Socket(SERVER_ADDRESS, PORT);  \nFileInputStream fis = new FileInputStream(filePath);  \nOutputStream out = socket.getOutputStream();  \nDataOutputStream dos = new DataOutputStream(out))  \n{ \nFile file = new File(filePath);  \ndos.writeUTF(file.getName());  \nbyte[] buffer = new byte[4096];  \nint bytesRead;  \nwhile ((bytesRead = fis.read(buffer)) != -1)  \n{  \ndos.write(buffer, 0, bytesRead);  \n}  \nSystem.out.println(\"File \" + file.getName() + \" sent successfully.\");",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 24
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 27,
+      "text": "fer = new byte[4096];  \nint bytesRead;  \nwhile ((bytesRead = fis.read(buffer)) != -1)  \n{  \ndos.write(buffer, 0, bytesRead);  \n}  \nSystem.out.println(\"File \" + file.getName() + \" sent successfully.\");  \n}  \ncatch (IOException e)  \n{  \nSystem.err.println(\"Client error: \" + e.getMessage());  \n}  \n}  \n} \n \n \nOUTPUT:  \n \nSERVER CODE:  \n \n \nCLIENT CODE:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThe Java program Application Using TCP Sockets like File transfer was Executed successfully and \noutput was verified.  \n \n\nPROGRAM:  \nDNS SERVER:   \nimport java.net.*;  \nimport java.util.HashMap;  \npublic class DNSServer  \n{ \npublic static void main(String[] args)  \n{ \n               HashMap<String, String> dnsTable = new HashMap<>();      \n                      dnsTable.put(\"example.com\", \"93.184.216.34\");  \n          dnsTable.put(\"google.com\", \"142.250.190.14\");  \n          dnsTable.put(\"yahoo.com\", \"98.138.219.232\");  \n         try (DatagramSocket serverSocket = new Datagra",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 25
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 28,
+      "text": "ple.com\", \"93.184.216.34\");  \n          dnsTable.put(\"google.com\", \"142.250.190.14\");  \n          dnsTable.put(\"yahoo.com\", \"98.138.219.232\");  \n         try (DatagramSocket serverSocket = new DatagramSocket(9876))  \n{ \n             System.out.println(\"DNS Server is running...\");  \n               byte[] receiveBuffer = new byte[1024];  \n               byte[] sendBuffer;  \n                           while (true)  \n{ \nDatagramPacket receivePacket = new \nDatagramPacket(receiveBuffer, receiveBuffer.length);  \n                 serverSocket.receive(receivePacket)           \n                  String domainName = new String(receivePacket.getData(), 0,           \n   receivePacket.getLength());  \nSystem.out.println(\"Received query for domain: \" + \ndomainName);  \nString ipAddress = dnsTable.getOrDefault(domainName, \"Domain \nnot found\");  \n                  sendBuffer = ipAddress.getBytes();  \n                  InetAddress clientAddress = receivePacket.getAddress();  \n                   int client",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 26
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 29,
+      "text": "ult(domainName, \"Domain \nnot found\");  \n                  sendBuffer = ipAddress.getBytes();  \n                  InetAddress clientAddress = receivePacket.getAddress();  \n                   int clientPort = receivePacket.getPort();  \nDatagramPacket sendPacket = new DatagramPacket(sendBuffer, \n sendBuffer.length, clientAddress, clientPort);  \n              serverSocket.send(sendPacket);  \n} \n         } \ncatch (Exception e)  \n{ \n               System.err.println(\"Server Error: \" + e.getMessage());  \n          } \n     } \n} \n \nDNS CLIENT:  \n \nimport java.net.*;  \nimport java.util.Scanner;  \npublic class DNSClient  \n{  \npublic static void main(String[] args)  \n{  \ntry (DatagramSocket clientSocket = new DatagramSocket())  \n{  \nScanner scanner = new Scanner(System.in);  \nInetAddress serverAddress = InetAddress.getByName(\"localhost\");  \nint serverPort = 9876;  \nbyte[] sendBuffer;  \nbyte[] receiveBuffer = new byte[1024];  \nwhile (true)  \n{  \nSystem.out.print(\"Enter a domain name to resolve (or",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 27
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 30,
+      "text": "= InetAddress.getByName(\"localhost\");  \nint serverPort = 9876;  \nbyte[] sendBuffer;  \nbyte[] receiveBuffer = new byte[1024];  \nwhile (true)  \n{  \nSystem.out.print(\"Enter a domain name to resolve (or 'exit' to \nquit): \");  \nString domainName = scanner.nextLine();  \nif (domainName.equalsIgnoreCase(\"exit\"))  \n{  \nSystem.out.println(\"Exiting...\");  \nbreak;  \n}  \nsendBuffer = domainName.getBytes();  \nDatagramPacket sendPacket = new DatagramPacket(sendBuffer, \nsendBuffer.length, serverAddress, serverPort);  \nclientSocket.send(sendPacket);  \nDatagramPacket receivePacket = new \nDatagramPacket(receiveBuffer, receiveBuffer.length);  \nclientSocket.receive(receivePacket);  \nString response = new String(receivePacket.getData(), 0, \nreceivePacket.getLength());  \nSystem.out.println(\"Response from server: \" + response);  \n}  \n}  \ncatch (Exception e)  \n{  \nSystem.err.println(\"Client Error: \" + e.getMessage());  \n} \n}  \n} \n \nOUTPUT:  \n \nDNS SERVER:  \n \n \nDNS CLIENT:",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 28
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 31,
+      "text": ": \" + response);  \n}  \n}  \ncatch (Exception e)  \n{  \nSystem.err.println(\"Client Error: \" + e.getMessage());  \n} \n}  \n} \n \nOUTPUT:  \n \nDNS SERVER:  \n \n \nDNS CLIENT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java program to implement Simulation of DNS using UDP sockets was \nexecuted successfully and output was verified.  \n\nPROGRAM:  \nimport java.util.HashMap;  \nimport java.util.Scanner;  \npublic class ARPRARPSimulation  \n{ \nprivate static final HashMap ARP_TABLE = new HashMap<>();  \nstatic  \n{  \nARP_TABLE.put(\"192.168.1.1\", \"00:1A:2B:3C:4D:5E\");  \nARP_TABLE.put(\"192.168.1.2\", \"00:1A:2B:3C:4D:5F\");  \nARP_TABLE.put(\"192.168.1.3\", \"00:1A:2B:3C:4D:60\"); \nARP_TABLE.put(\"192.168.1.4\", \"00:1A:2B:3C:4D:61\");  \n}  \npublic static void main(String[] args)  \n{  \nScanner scanner = new Scanner(System.in);  \nint choice;  \nSystem.out.println(\"ARP/RARP Simulation\"); \nSystem.out.println(\"====================\");  \nwhile (true)  \n{ \nSystem.out.println(\" \\nChoose an",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 29
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 32,
+      "text": "Scanner scanner = new Scanner(System.in);  \nint choice;  \nSystem.out.println(\"ARP/RARP Simulation\"); \nSystem.out.println(\"====================\");  \nwhile (true)  \n{ \nSystem.out.println(\" \\nChoose an option:\");  \nSystem.out.println(\"1. Perform ARP (Resolve IP to MAC)\"); \nSystem.out.println(\"2. Perform RARP (Resolve MAC to IP)\");  \nSystem.out.println(\"3. Exit\");  \nSystem.out.print(\"Enter your choice: \");  \nchoice = scanner.nextInt();  \nswitch (choice)  \n{  \ncase 1 -> performARP(scanner);  \ncase 2 -> performRARP(scanner);  \ncase 3 ->  \n{  \nSystem.out.println(\"Exiting program...\");  \nscanner.close();  \nSystem.exit(0);  \n} \ndefault -> System.out.println(\"Invalid choice. Please try again.\");  \n}  \n}  \n}  \nprivate static void performARP(Scanner scanner)  \n{  \nSystem.out.print(\" \\nEnter the IP address to resolve: \");  \nString ipAddress = scanner.next();  \nif (ARP_TABLE.containsKey(ipAddress))  \n{  \nString macAddress = ARP_TABLE.get(ipAddress); \nSystem.out.println(\"Resolved MAC Address: \" + m",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 30
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 33,
+      "text": "ddress to resolve: \");  \nString ipAddress = scanner.next();  \nif (ARP_TABLE.containsKey(ipAddress))  \n{  \nString macAddress = ARP_TABLE.get(ipAddress); \nSystem.out.println(\"Resolved MAC Address: \" + macAddress);  \n}  \nelse  \n{  \nSystem.out.println(\"IP Address not found in the ARP table.\");  \n}  \n} \nprivate static void performRARP(Scanner scanner)  \n{  \nSystem.out.print(\" \\nEnter the MAC address to resolve: \");  \nString macAddress = scanner.next();  \nString resolvedIp = null;  \nfor (var entry : ARP_TABLE.entrySet())  \n{  \nif (entry.getValue().equalsIgnoreCase(macAddress))  \n{  \nresolvedIp = entry.getKey();  \nbreak;  \n}  \n}  \nif (resolvedIp != null)  \n{  \nSystem.out.println(\"Resolved IP Address: \" + resolvedIp);  \n}  \nelse  \n{  \nSystem.out.println(\"MAC Address not found in the ARP table.\");  \n}  \n}  \n} \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java program to implement Simulation of ARP/RARP Protocols was executed \nsuccessfully and output",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 31
+    },
+    {
+      "doc_id": 1,
+      "chunk_id": 34,
+      "text": "}  \n}  \n} \n \n \n \n \n \n \n \n \n \n \nOUTPUT:  \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nRESULT:  \nThus the Java program to implement Simulation of ARP/RARP Protocols was executed \nsuccessfully and output was verified.",
+      "filename": "CN_RECORD.pdf",
+      "chunk_index": 32
+    },
+    {
+      "doc_id": 2,
+      "chunk_id": 35,
+      "text": "Aptitude Sample Questions with Detailed Answers & Explanations Section A – Figure / Logical\nReasoning Q1. ■, ■, ■, ? → Answer: ■\nExplanation: Alternates between color and shape; next must be a shape (red). Q2. ■ → ■ → ■ →\n■ → ? → Answer: ■\nExplanation: Alternating black-white pattern; 5th term is white. Q3. Which figure is different? (●▲,\n▲●, ●●, ●▲) → Answer: ●●\nExplanation: All have circle & triangle except ●●. Q4. Matrix pattern → Answer: ■\nExplanation: Each column repeats top symbol at bottom. Q5. Folded paper → Answer: 2 holes\nExplanation: One fold doubles holes. Q6. ■ → ■ → ■ → ■ → ? → Answer: ■\nExplanation: Follows rainbow color order. Q7. Mirror image of BOXING → Answer: GNIXOB\nExplanation: Mirror reverses order. Q8. Water image of 2691 → Answer: 1962\nExplanation: Swap 6↔9; reflect horizontally. Q9. Cube color logic → Answer: White\nExplanation: Based on opposite face orientation. Q10. Pattern completion → Answer: ■\nExplanation: Checkerboard pattern; center opposite color.",
+      "filename": "Aptitude_Questions_Answers_Explained.pdf",
+      "chunk_index": 0
+    },
+    {
+      "doc_id": 2,
+      "chunk_id": 36,
+      "text": "eflect horizontally. Q9. Cube color logic → Answer: White\nExplanation: Based on opposite face orientation. Q10. Pattern completion → Answer: ■\nExplanation: Checkerboard pattern; center opposite color. Section B – Quantitative Aptitude Q11.\nUnit digit of 2252^25 → Answer: 2\nExplanation: Power cycle of 2 repeats every 4; 25 mod 4 = 1. Q12. LCM of 12 & 18 → Answer: 36\nExplanation: Highest prime powers: 2²×3²=36. Q13. 15% of 240 → Answer: 36\nExplanation: 240×15/100=36. Q14. Sum of first 20 natural numbers → Answer: 210\nExplanation: n(n+1)/2 formula. Q15. 35 ÷ 7 → Answer: Remainder 0\nExplanation: 7×5=35 exactly. Q16. Largest 4-digit divisible by 12 → Answer: 9996\nExplanation: 9999–(9999 mod 12)=9996. Q17. Number leaving remainder 5 when ÷6,8,10 →\nAnswer: 125\nExplanation: Number=LCM(6,8,10)+5=120+5. Q18. Trailing zeroes in 100! → Answer: 24\nExplanation: Count of 5s: 100/5+100/25=24. Q19. Product=180, LCM=60 → Answer: HCF=3\nExplanation: HCF×LCM=Product ⇒ 3×60=180. Q20. 12+13+14+15+1/2+1/3+1/4",
+      "filename": "Aptitude_Questions_Answers_Explained.pdf",
+      "chunk_index": 1
+    },
+    {
+      "doc_id": 2,
+      "chunk_id": 37,
+      "text": "0+5. Q18. Trailing zeroes in 100! → Answer: 24\nExplanation: Count of 5s: 100/5+100/25=24. Q19. Product=180, LCM=60 → Answer: HCF=3\nExplanation: HCF×LCM=Product ⇒ 3×60=180. Q20. 12+13+14+15+1/2+1/3+1/4+1/5 → Answer:\n≈55.28\nExplanation: Integers 54 + Fractions 1.283=55.28. Section C – Reasoning & Relations Q21. “My\nfather’s only son” → Answer: Ramesh himself\nExplanation: Refers to himself. Q22. A mother of B, B sister of C → Answer: Mother\nExplanation: A is mother of both. Q23. P father of Q, Q sister of R, R son of S → Answer: Mother\nof Q\nExplanation: P father → S mother. Q24. “Her husband’s brother is my uncle” → Answer: Mother\nExplanation: Her husband=my father. Q25. “Son of his father’s only son” → Answer: Son\nExplanation: Refers to own son. Q26. A father of B, D brother of B, C mother of D → Answer:\nHusband\nExplanation: A&C; are parents of same children. Q27. P ÷ Q × R – S → Answer: Sibling\nExplanation: All are Q’s children. Q28. Raj–Sunita–Mahesh–Sohan chain → Answer: Nephew\nExplan",
+      "filename": "Aptitude_Questions_Answers_Explained.pdf",
+      "chunk_index": 2
+    },
+    {
+      "doc_id": 2,
+      "chunk_id": 38,
+      "text": "f D → Answer:\nHusband\nExplanation: A&C; are parents of same children. Q27. P ÷ Q × R – S → Answer: Sibling\nExplanation: All are Q’s children. Q28. Raj–Sunita–Mahesh–Sohan chain → Answer: Nephew\nExplanation: Sister’s son relation. Q29. A brother of B, B sister of C, C father of D → Answer:\nUncle\nExplanation: Brother of father. Q30. “Brother=219, Sister=315” find “Father” → Answer: 315\nExplanation: Same 6-letter pattern as “Sister”.",
+      "filename": "Aptitude_Questions_Answers_Explained.pdf",
+      "chunk_index": 3
+    }
+  ]
+}
